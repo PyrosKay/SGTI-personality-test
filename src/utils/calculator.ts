@@ -8,30 +8,71 @@ interface DimensionMeta {
 }
 
 export const dimensionMeta: Record<string, DimensionMeta> = {
-  introversion: { name: '内倾性', category: 'self' },
-  creativity: { name: '创造性', category: 'self' },
-  independence: { name: '独立性', category: 'self' },
-  selfReflection: { name: '自我反思', category: 'self' },
-  rationality: { name: '理性思维', category: 'self' },
+  // 自我维度
+  leadership: { name: '领导力', category: 'self' },
+  confidence: { name: '自信', category: 'self' },
+  rebellious: { name: '反叛精神', category: 'self' },
+  independent: { name: '独立性', category: 'self' },
+  philosophical: { name: '哲学思维', category: 'self' },
+  humorous: { name: '幽默感', category: 'self' },
+  rational: { name: '理性思维', category: 'self' },
   analytical: { name: '分析能力', category: 'self' },
-  emotionalDepth: { name: '情感深度', category: 'emotion' },
-  empathy: { name: '共情能力', category: 'emotion' },
-  sensitivity: { name: '敏感度', category: 'emotion' },
-  resilience: { name: '心理韧性', category: 'emotion' },
-  optimism: { name: '乐观程度', category: 'emotion' },
-  authenticity: { name: '真实自我', category: 'emotion' },
-  extroversion: { name: '外倾性', category: 'social' },
-  sociability: { name: '社交能力', category: 'social' },
-  collaboration: { name: '协作能力', category: 'social' },
-  socialBond: { name: '社交归属', category: 'social' },
-  leadership: { name: '领导力', category: 'social' },
-  assertiveness: { name: '主见性', category: 'social' },
-  openness: { name: '开放性', category: 'stress' },
-  spontaneity: { name: '随机应变', category: 'stress' },
-  riskTaking: { name: '冒险精神', category: 'stress' },
-  adaptability: { name: '适应能力', category: 'stress' },
-  autonomy: { name: '自主性', category: 'stress' },
-  courage: { name: '勇气', category: 'stress' },
+  strategic: { name: '战略思维', category: 'self' },
+  persistent: { name: '坚持不懈', category: 'self' },
+  competitive: { name: '竞争意识', category: 'self' },
+  ambitious: { name: '雄心壮志', category: 'self' },
+  
+  // 情感维度
+  empathetic: { name: '共情能力', category: 'emotion' },
+  peaceful: { name: '平和心态', category: 'emotion' },
+  emotional: { name: '情感丰富', category: 'emotion' },
+  sensitive: { name: '敏感细腻', category: 'emotion' },
+  passionate: { name: '热情似火', category: 'emotion' },
+  dramatic: { name: '戏剧性', category: 'emotion' },
+  authentic: { name: '真实自我', category: 'emotion' },
+  resilient: { name: '心理韧性', category: 'emotion' },
+  stoic: { name: '坚韧克制', category: 'emotion' },
+  tragic: { name: '悲剧色彩', category: 'emotion' },
+  romantic: { name: '浪漫主义', category: 'emotion' },
+  tough: { name: '坚强硬朗', category: 'emotion' },
+  
+  // 社交维度
+  social: { name: '社交能力', category: 'social' },
+  extroverted: { name: '外向性格', category: 'social' },
+  introverted: { name: '内向性格', category: 'social' },
+  loyal: { name: '忠诚可靠', category: 'social' },
+  collaborative: { name: '协作精神', category: 'social' },
+  heroic: { name: '英雄气概', category: 'social' },
+  playful: { name: '玩世不恭', category: 'social' },
+  mischievous: { name: '调皮捣蛋', category: 'social' },
+  caring: { name: '关心他人', category: 'social' },
+  selective: { name: '选择性社交', category: 'social' },
+  teamwork: { name: '团队意识', category: 'social' },
+  coordinated: { name: '协调能力', category: 'social' },
+  
+  // 应对维度
+  spontaneous: { name: '随性而为', category: 'stress' },
+  adventurous: { name: '冒险精神', category: 'stress' },
+  balanced: { name: '平衡之道', category: 'stress' },
+  pragmatic: { name: '务实主义', category: 'stress' },
+  brave: { name: '勇敢无畏', category: 'stress' },
+  tactical: { name: '战术灵活', category: 'stress' },
+  defensive: { name: '防守意识', category: 'stress' },
+  cautious: { name: '谨慎小心', category: 'stress' },
+  optimistic: { name: '乐观心态', category: 'stress' },
+  accepting: { name: '接受放下', category: 'stress' },
+  cunning: { name: '狡黠机敏', category: 'stress' },
+  opportunistic: { name: '抓住机会', category: 'stress' },
+  witty: { name: '机智俏皮', category: 'stress' },
+  decisive: { name: '果断决策', category: 'stress' },
+  impulsive: { name: '冲动行事', category: 'stress' },
+  deliberate: { name: '深思熟虑', category: 'stress' },
+  determined: { name: '决心坚定', category: 'stress' },
+  principled: { name: '有原则', category: 'stress' },
+  wise: { name: '睿智通透', category: 'stress' },
+  carefree: { name: '无忧无虑', category: 'stress' },
+  practical: { name: '务实实际', category: 'stress' },
+  resigned: { name: '顺其自然', category: 'stress' },
 };
 
 // 计算所有维度的得分
@@ -85,201 +126,251 @@ function getDimensionDescription(id: string, score: number): string {
   const { label } = getLevelLabel(score);
   
   const descriptions: Record<string, Record<string, string>> = {
-    introversion: {
-      '偏低': '你更倾向于外向，享受与人交往带来的能量',
-      '中等偏低': '你有社交需求，但也需要独处时间来恢复精力',
-      '适中': '你能在独处和社交之间灵活切换',
-      '中等偏高': '你更喜欢安静的氛围，但也能正常社交',
-      '偏高': '你享受独处，在安静中才能真正充电',
+    leadership: {
+      '偏低': '你更倾向于跟随而非领导',
+      '中等偏低': '你有领导潜质但更愿保持低调',
+      '适中': '你能在需要时承担领导角色',
+      '中等偏高': '你有较强的领导能力和号召力',
+      '偏高': '你天生具有领导气质，善于指挥和决策',
     },
-    creativity: {
-      '偏低': '你更倾向于按部就班，遵循已有方法',
-      '中等偏低': '你有自己的想法，但会考虑可行性',
-      '适中': '你有一定的创意，能提出有新意的想法',
-      '中等偏高': '你思维活跃，常常有独特的想法',
-      '偏高': '你极具创造力，思维跳跃，想象力丰富',
-    },
-    emotionalDepth: {
-      '偏低': '你情绪稳定，不容易被情绪左右',
-      '中等偏低': '你情绪波动较小，能保持理性',
-      '适中': '你情绪丰富但不极端，能较好地处理情感',
-      '中等偏高': '你情感细腻，对事物有较深的感受',
-      '偏高': '你情感世界丰富而深刻，容易被触动',
-    },
-    empathy: {
-      '偏低': '你更注重逻辑和事实',
-      '中等偏低': '你能理解他人，但保持理性判断',
+    empathetic: {
+      '偏低': '你更注重事实和逻辑',
+      '中等偏低': '你能理解他人但保持理性',
       '适中': '你有较好的共情能力',
-      '中等偏高': '你很能理解他人感受',
-      '偏高': '你极易感受他人情绪，有很强的共情能力',
+      '中等偏高': '你很能理解他人的感受',
+      '偏高': '你极易感受他人情绪，是天生的倾听者',
     },
-    rationality: {
-      '偏低': '你更注重感受和直觉',
-      '中等偏低': '你会考虑情感因素，但不失理性',
-      '适中': '你能平衡理性与感性',
-      '中等偏高': '你思维缜密，做事有逻辑',
-      '偏高': '你极度理性，很少被情绪影响判断',
+    social: {
+      '偏低': '你更喜欢独处或小圈子社交',
+      '中等偏低': '你有选择性社交的需求',
+      '适中': '你社交适度，享受与人交往',
+      '中等偏高': '你喜欢结交新朋友',
+      '偏高': '你是社交达人，人缘极好',
     },
-    analytical: {
-      '偏低': '你更依赖直觉和经验',
-      '中等偏低': '你会分析问题但不钻牛角尖',
-      '适中': '你有不错的分析能力',
-      '中等偏高': '你擅长分析，能深入理解问题',
-      '偏高': '你分析能力极强，善于拆解复杂问题',
+    spontaneous: {
+      '偏低': '你更喜欢有计划的生活',
+      '中等偏低': '你会偶尔放松但保持克制',
+      '适中': '你能平衡计划与随性',
+      '中等偏高': '你享受即兴带来的惊喜',
+      '偏高': '你完全随心所欲，生活充满惊喜',
     },
-    openness: {
-      '偏低': '你更喜欢熟悉和稳定',
-      '中等偏低': '你接受新事物但保持谨慎',
-      '适中': '你对新事物保持开放态度',
-      '中等偏高': '你乐于接受新想法和体验',
-      '偏高': '你极度开放，追求新鲜体验',
+    ambitious: {
+      '偏低': '你更注重当下的幸福',
+      '中等偏低': '你有目标但不会强求',
+      '适中': '你有适度的进取心',
+      '中等偏高': '你追求成功和成就',
+      '偏高': '你野心勃勃，追求卓越',
     },
-    resilience: {
-      '偏低': '面对挫折你容易受到打击',
-      '中等偏低': '你有一定的抗压能力',
-      '适中': '你能较好地应对挫折',
-      '中等偏高': '你有较强的心理韧性',
-      '偏高': '你心理素质极强，挫折无法击倒你',
+    emotional: {
+      '偏低': '你情绪稳定，不易被触动',
+      '中等偏低': '你情绪波动较小',
+      '适中': '你情感丰富但可控',
+      '中等偏高': '你容易被感动',
+      '偏高': '你情感充沛，是性情中人',
     },
-    sociability: {
-      '偏低': '你更喜欢小圈子或独自活动',
-      '中等偏低': '你有几个亲密朋友，不需要太多社交',
-      '适中': '你社交适度，享受社交但不依赖',
-      '中等偏高': '你喜欢社交，人缘不错',
-      '偏高': '你非常外向，享受各种社交场合',
+    strategic: {
+      '偏低': '你更注重眼前而非长远',
+      '中等偏低': '你会考虑策略但更凭直觉',
+      '适中': '你有不错的策略思维',
+      '中等偏高': '你善于规划和布局',
+      '偏高': '你是战略大师，深谋远虑',
     },
-    independence: {
-      '偏低': '你依赖性较强，需要他人支持',
-      '中等偏低': '你能独立但也愿意接受帮助',
-      '适中': '你独立自主，能独自完成任务',
-      '中等偏高': '你非常独立，不依赖他人',
-      '偏高': '你极度独立，习惯独自解决问题',
+    loyal: {
+      '偏低': '你更注重个人利益',
+      '中等偏低': '你会权衡利弊再决定忠诚',
+      '适中': '你对朋友有适度的忠诚',
+      '中等偏高': '你非常重视承诺和友谊',
+      '偏高': '你为朋友两肋插刀，是最可靠的后盾',
+    },
+    rebellious: {
+      '偏低': '你更遵守规则',
+      '中等偏低': '你会质疑但不一定行动',
+      '适中': '你有适度的反叛精神',
+      '中等偏高': '你不甘平庸，追求自由',
+      '偏高': '你是规则的挑战者，天生的叛逆者',
+    },
+    brave: {
+      '偏低': '你更倾向于谨慎行事',
+      '中等偏低': '你会谨慎评估风险',
+      '适中': '你能在关键时刻勇敢',
+      '中等偏高': '你有较强的勇气',
+      '偏高': '你无所畏惧，是真正的勇者',
     },
   };
 
   return descriptions[id]?.[label] || `${meta.name}${label}`;
 }
 
-// 生成人格结果
-export function generatePersonalityResult(dimensions: Dimension[]): PersonalityResult {
-  // 找出主要特征
-  const sorted = [...dimensions].sort((a, b) => b.score - a.score);
-  const highest = sorted.slice(0, 3);
-
-  // 根据特征组合生成人格类型
-  const typeInfo = generatePersonalityType(highest);
-  
-  // 分类维度
-  const categorized: Record<DimensionCategory, Dimension[]> = {
-    self: [],
-    emotion: [],
-    social: [],
-    stress: [],
-  };
-  
-  for (const dim of dimensions) {
-    categorized[dim.category].push(dim);
-  }
-
-  return {
-    ...typeInfo,
-    dimensions,
-  };
-}
-
-interface PersonalityTypeInfo {
-  type: string;
-  title: string;
+// 14种人格类型定义
+interface PersonalityTypeDefinition {
+  chineseName: string;
+  englishName: string;
   subtitle: string;
   description: string;
   quote: string;
+  traits: string[]; // 关联的特征
 }
 
-function generatePersonalityType(
-  highest: Dimension[]
-): PersonalityTypeInfo {
-  // 根据最高分维度组合判断人格类型
-  const topIds = highest.map((d) => d.id);
-  
-  const types: Record<string, PersonalityTypeInfo> = {
-    'introversion+creativity+emotionalDepth': {
-      type: '深沉的艺术家',
-      title: '深沉的艺术家',
-      subtitle: '内向 · 创造 · 感性',
-      description: '你是一个内心世界丰富的人，拥有独特的审美和深邃的情感。你喜欢独处，在安静中思考人生的意义。你的创造力来自于对生活的细腻观察和对情感的深刻体验。你不善言辞，但你的作品或想法往往能触动人心。',
-      quote: '「孤独是创造力的温床，而我在这温床里培育出独特的灵魂。」',
-    },
-    'rationality+analytical+independence': {
-      type: '冷静的思考者',
-      title: '冷静的思考者',
-      subtitle: '理性 · 分析 · 独立',
-      description: '你是一个理性至上的人，善于用逻辑分析问题。你独立自主，不依赖他人做决定。面对复杂问题，你能保持冷静，抽丝剥茧找到解决方案。你的思维方式让你的话更有说服力。',
-      quote: '「情绪是迷雾，逻辑才是灯塔。」',
-    },
-    'empathy+collaboration+socialBond': {
-      type: '温暖的治愈者',
-      title: '温暖的治愈者',
-      subtitle: '共情 · 协作 · 归属',
-      description: '你天生具有强大的共情能力，是朋友眼中的温暖存在。你善于倾听，理解他人的感受和需求。你重视人际关系，愿意为他人付出。你的存在本身就是一种治愈力量。',
-      quote: '「我愿意成为你黑暗中的那束光。」',
-    },
-    'extroversion+assertiveness+leadership': {
-      type: '闪耀的领导者',
-      title: '闪耀的领导者',
-      subtitle: '外向 · 主见 · 领导',
-      description: '你天生具有领导气质，自信而有魄力。你善于表达自己的想法，能激励他人跟随。你外向开朗，享受成为焦点的感觉。你敢于冒险，愿意带领团队开疆扩土。',
-      quote: '「跟着我，我们一起创造奇迹。」',
-    },
-    'openness+spontaneity+creativity': {
-      type: '自由的探索者',
-      title: '自由的探索者',
-      subtitle: '开放 · 随机 · 创造',
-      description: '你是一个不安分的灵魂，对世界充满好奇。你追求自由，不愿被规则束缚。你的生活充满了惊喜和变化，思维跳跃而富有创意。你相信人生的意义在于体验。',
-      quote: '「生活不是等待风暴过去，而是学会在雨中起舞。」',
-    },
-    'resilience+optimism+adaptability': {
-      type: '乐观的战士',
-      title: '乐观的战士',
-      subtitle: '韧性 · 乐观 · 适应',
-      description: '你是一个天生的乐观主义者，无论遇到什么困难都能保持积极心态。你适应能力强，能在各种环境中生存。你的韧性让你在逆境中成长，是真正的打不死的小强。',
-      quote: '「只要活着，就没有什么过不去的坎。」',
-    },
-    'introversion+rationality+conscientiousness': {
-      type: '沉稳的智者',
-      title: '沉稳的智者',
-      subtitle: '内敛 · 理性 · 严谨',
-      description: '你是一个内敛而严谨的人，喜欢深度思考。你做事有计划，注重细节和品质。你不轻易发表意见，但一旦开口必有分量。你的沉稳让人感到安心。',
-      quote: '「沉默是金，但当我说出口时，必定字字珠玑。」',
-    },
-    'emotionalDepth+sensitivity+introspection': {
-      type: '敏感的诗人',
-      title: '敏感的诗人',
-      subtitle: '深度 · 敏感 · 内省',
-      description: '你有着细腻敏感的心灵，能感受到常人忽略的细微之处。你喜欢独处和思考，人生对你来说是一场深度的内心旅程。你的感受力是你的天赋，也是你需要守护的脆弱。',
-      quote: '「世界在我眼中，比在他人眼中要丰富得多。」',
-    },
-  };
+const personalityTypes: PersonalityTypeDefinition[] = [
+  {
+    chineseName: '神曹操',
+    englishName: 'PUA大师',
+    subtitle: 'PUA-R',
+    description: '你是三国杀中最令人闻风丧胆的存在——神曹操。你深谙人性弱点，善于操控他人情绪，让对手在不知不觉中为你买单。你的一句"领导 先摸两张"就能让全场心态崩溃。你不是在玩三国杀，你是在玩心理战。',
+    quote: '「要么全场是我的队友，要么全场都是我的工具人。」',
+    traits: ['leadership', 'cunning', 'manipulative'],
+  },
+  {
+    chineseName: '鲁肃',
+    englishName: '送钱者',
+    subtitle: 'ATM-er',
+    description: '你是三国杀中的"散财童子"鲁肃，乐善好施到让队友心惊肉跳。你的手牌就像流水一样往外送，美其名曰"联姻"，实则是纯纯的ATM体质。你是全场最想保护的人，也是全场最容易被集火的人。',
+    quote: '「能帮就帮，能送就送，反正我死了你们也赢不了。」',
+    traits: ['generous', 'caring', 'selfless'],
+  },
+  {
+    chineseName: '祢衡',
+    englishName: '西海岸',
+    subtitle: 'RAP',
+    description: '你是嘴强王者祢衡，一开口就是RAP，让敌人血压飙升。你的毒舌可以让任何人破防，你的嘴可以让整场游戏变成单口相声。你不是在输出伤害，你是在输出精神污染。',
+    quote: '「诸葛村夫！司马老贼！江东鼠辈！」',
+    traits: ['rebellious', 'confident', 'playful'],
+  },
+  {
+    chineseName: '刘焉',
+    englishName: '梦想家',
+    subtitle: 'DREAM-er',
+    description: '你是白日梦想家刘焉，立着图v的flag却做着丈八的梦。你的激情可以点燃全场，你的乐观可以感染队友，虽然经常翻车，但你的梦想从未熄灭。',
+    quote: '「图！给我图！丈八蛇矛直取首级！」',
+    traits: ['ambitious', 'passionate', 'dramatic'],
+  },
+  {
+    chineseName: '司马懿',
+    englishName: '我命由我不由天',
+    subtitle: '♠2-9',
+    description: '你是忍辱负重的司马懿，擅长"死诸葛吓退活仲达"的戏码。你是场上的养生大师，能不动就不动，让对手先打。你是场上最靓的蹲子，也是最后的赢家。',
+    quote: '「天命？不好意思，我自己就是天命。」',
+    traits: ['patient', 'strategic', 'cunning'],
+  },
+  {
+    chineseName: '郭嘉',
+    englishName: '深夜文学家',
+    subtitle: 'EMO',
+    description: '你是emo达人郭嘉，泪流满面却不忘给队友递牌。你的伤感可以写成诗，你的遗计可以定乾坤。你是天生的悲剧主角，也是最可靠的辅助。',
+    quote: '「主公策马奔逃，嘉早为其备良马...我这是遗计，不是遗言啊！」',
+    traits: ['emotional', 'strategic', 'tragic'],
+  },
+  {
+    chineseName: '诸葛亮',
+    englishName: '妈沫',
+    subtitle: 'MUM',
+    description: '你是场上的操心命诸葛亮，既要观星又要空城，既要保核又要控底。你是天生的操心的妈沫，所有人的安全都是你的责任。',
+    quote: '「你们都给我活着，我来断后！」',
+    traits: ['caring', 'strategic', 'protective'],
+  },
+  {
+    chineseName: '华佗',
+    englishName: '移动泉水',
+    subtitle: 'CURE',
+    description: '你是神医华佗，场上行走的泉水，但是经常摸到丈八。你是所有人的守护神，也是最容易成为内奸针对的对象。你的存在就是让队友多一条命。',
+    quote: '「伤筋动骨一百天，我给你治！」',
+    traits: ['caring', 'generous', 'selfless'],
+  },
+  {
+    chineseName: '左慈',
+    englishName: '尤物',
+    subtitle: 'SEXY',
+    description: '你是变化多端的左慈，场上化身最多，让对手摸不清你的身份。你是真正的花板子，每一局都是全新的体验。你的快乐来自于对手的懵逼。',
+    quote: '「化身？让我想想用哪个身份搞你。」',
+    traits: ['spontaneous', 'strategic', 'mischievous'],
+  },
+  {
+    chineseName: '孙尚香',
+    englishName: '剁手者',
+    subtitle: 'POOR',
+    description: '你是牌差女王孙尚香，装备装到破产，牌堆摸到破产。你是场上最穷的人，也是输出最高的人。你的名言是：装备不穿，留着干嘛？',
+    quote: '「联姻？先让我把装备换了再说！」',
+    traits: ['aggressive', 'decisive', 'reckless'],
+  },
+  {
+    chineseName: 'SP赵云',
+    englishName: '孤勇者',
+    subtitle: '7in7out',
+    description: '你是孤胆英雄SP赵云，怀里揣着七张牌就敢单挑全场。你的眼里没有队友，只有敌人。你是真正的独狼，也是全场最靓的冲锋战士。',
+    quote: '「七张牌，够杀七个了，谁赞成？谁反对？」',
+    traits: ['brave', 'independent', 'aggressive'],
+  },
+  {
+    chineseName: '费祎',
+    englishName: '保核专家',
+    subtitle: 'F1',
+    description: '你是稳健派代表费祎，回合开始回口血，回合结束再回口血。你不是最强的，但你一定是最稳的。你的存在就是让主公安心。',
+    quote: '「来来来，都坐下，咱们慢慢耗。」',
+    traits: ['balanced', 'protective', 'patient'],
+  },
+  {
+    chineseName: '刘禅',
+    englishName: '傻乐者',
+    subtitle: 'HHHH',
+    description: '你是全场最快乐的人刘禅，享乐流代表人物。管你什么身份，反正你有爹就行。你的快乐可以感染全场，你的傻笑可以气死内奸。',
+    quote: '「嘿嘿嘿，有爹爹在，我怕谁！」',
+    traits: ['optimistic', 'carefree', 'trusting'],
+  },
+  {
+    chineseName: '界徐盛',
+    englishName: '版本答案',
+    subtitle: 'OMG',
+    description: '你是版本之子界徐盛，阴间到让对手想挂机。你是一刀999的代名词，让所有人闻风丧胆。你不是在玩游戏，你是在虐菜。',
+    quote: '「大宝的刀，砍谁谁死，这还用解释吗？」',
+    traits: ['aggressive', 'confident', 'powerful'],
+  },
+];
 
-  // 尝试匹配类型
-  const combinations = [
-    topIds.join('+'),
-    [...topIds.slice(0, 2)].join('+'),
-    topIds[0],
-  ];
+// 生成人格结果
+export function generatePersonalityResult(dimensions: Dimension[]): PersonalityResult {
+  // 计算各特征的平均得分
+  const dimensionScores: Record<string, number> = {};
+  for (const dim of dimensions) {
+    dimensionScores[dim.id] = dim.score;
+  }
 
-  for (const combo of combinations) {
-    if (types[combo]) {
-      return types[combo];
+  // 根据特征计算每个人格的匹配度
+  let bestMatch = personalityTypes[0];
+  let highestScore = -1;
+
+  for (const personType of personalityTypes) {
+    let matchScore = 0;
+    let matchCount = 0;
+
+    for (const trait of personType.traits) {
+      if (dimensionScores[trait] !== undefined) {
+        // 计算该特征得分与理想值的匹配度
+        // 人格特征理想值在60-80之间
+        const ideal = 70;
+        const diff = Math.abs(dimensionScores[trait] - ideal);
+        matchScore += (100 - diff);
+        matchCount++;
+      }
+    }
+
+    if (matchCount > 0) {
+      const avgScore = matchScore / matchCount;
+      // 添加一些随机性让结果更有趣
+      const randomFactor = Math.random() * 10;
+      if (avgScore + randomFactor > highestScore) {
+        highestScore = avgScore + randomFactor;
+        bestMatch = personType;
+      }
     }
   }
 
-  // 默认类型
   return {
-    type: '独特的我',
-    title: '独特的我',
-    subtitle: '独一无二的存在',
-    description: '你是一个独特的存在，拥有多面的性格。你的特质难以用简单的标签定义，因为你是如此丰富多彩。每个维度都在塑造着独一无二的你。保持这份独特，世界需要你这样的色彩。',
-    quote: '「我就是我，不被定义的我。」',
+    type: bestMatch.chineseName,
+    title: bestMatch.chineseName,
+    subtitle: bestMatch.subtitle,
+    description: bestMatch.description,
+    quote: bestMatch.quote,
+    dimensions,
   };
 }
 
