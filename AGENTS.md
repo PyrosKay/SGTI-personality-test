@@ -1,46 +1,111 @@
-# 项目上下文
+# 性格成分鉴定 - 项目文档
+
+## 项目概述
+基于心理学维度的性格测试/成分鉴定类 Web 应用，通过 20 道情境选择题分析用户性格特征。
 
 ## 技术栈
-
-- **核心**: Vite 7, TypeScript, Express
-- **UI**: Tailwind CSS
+- **前端框架**: React 19 + TypeScript
+- **构建工具**: Vite 7
+- **路由**: React Router v7
+- **样式**: Tailwind CSS 4（灰白简约风格）
+- **存储**: localStorage（答题进度持久化）
 
 ## 目录结构
-
 ```
-├── scripts/            # 构建与启动脚本
-│   ├── build.sh        # 构建脚本
-│   ├── dev.sh          # 开发环境启动脚本
-│   ├── prepare.sh      # 预处理脚本
-│   └── start.sh        # 生产环境启动脚本
-├── server/             # 服务端逻辑
-│   ├── routes/         # API 路由
-│   ├── server.ts       # Express 服务入口
-│   └── vite.ts         # Vite 中间件集成
-├── src/                # 前端源码
-│   ├── index.css       # 全局样式
-│   ├── index.ts        # 客户端入口
-│   └── main.ts         # 主逻辑
-├── index.html          # 入口 HTML
-├── package.json        # 项目依赖管理
-├── tsconfig.json       # TypeScript 配置
-└── vite.config.ts      # Vite 配置
+├── src/
+│   ├── main.tsx           # React 入口
+│   ├── App.tsx            # 路由配置
+│   ├── index.css         # 全局样式 (Tailwind CSS 4)
+│   ├── pages/
+│   │   ├── Home.tsx      # 首页
+│   │   ├── Quiz.tsx      # 答题页
+│   │   └── Result.tsx    # 结果页
+│   ├── data/
+│   │   ├── types.ts      # 类型定义
+│   │   └── questions.ts  # 题目数据 (20道题)
+│   └── utils/
+│       └── calculator.ts # 评分计算逻辑
+├── index.html             # 入口 HTML
+├── vite.config.ts         # Vite 配置
+├── postcss.config.js      # PostCSS 配置
+└── package.json           # 依赖管理
 ```
 
-## 包管理规范
+## 页面说明
 
-**仅允许使用 pnpm** 作为包管理器，**严禁使用 npm 或 yarn**。
-**常用命令**：
-- 安装依赖：`pnpm add <package>`
-- 安装开发依赖：`pnpm add -D <package>`
-- 安装所有依赖：`pnpm install`
-- 移除依赖：`pnpm remove <package>`
+### 首页 (Home)
+- 测试标题和简介
+- 人格类型预览卡片（4个关键词展示）
+- 测试说明（题数、维度、耗时）
+- 开始测试按钮
+- 渐变背景动画装饰
 
-## 开发规范
+### 答题页 (Quiz)
+- 顶部进度条（当前题号/总题数）
+- 返回按钮
+- 题目描述 + A/B/C/D 选项
+- 选择后自动跳转下一题（300ms 延迟）
+- 最后一题完成后跳转结果页
+- 答题进度自动保存到 localStorage
 
-- 使用 Tailwind CSS 进行样式开发
+### 结果页 (Result)
+- 测试结果标题、人格类型名称和标签语
+- 人格描述文字 + 引用毒舌点评
+- 维度详情展示（按分类分组）：
+  - 自我维度、情感维度、社交维度、应对维度
+  - 每个维度卡片：名称、评分（等级 + X/100）、文字描述、进度条
+- 分享按钮 + 重新测试按钮
 
-### 编码规范
+## 维度体系
 
-- 默认按 TypeScript `strict` 心智写代码；优先复用当前作用域已声明的变量、函数、类型和导入，禁止引用未声明标识符或拼错变量名。
-- 禁止隐式 `any` 和 `as any`；函数参数、返回值、解构项、事件对象、Express `req`/`res`、`catch` 错误在使用前应有明确类型或先完成类型收窄，并清理未使用的变量和导入。
+### 自我维度 (self)
+- 内倾性、创造性、独立性、自我反思、理性思维、分析能力
+
+### 情感维度 (emotion)
+- 情感深度、共情能力、敏感度、心理韧性、乐观程度、真实自我
+
+### 社交维度 (social)
+- 外倾性、社交能力、协作能力、社交归属、领导力、主见性
+
+### 应对维度 (stress)
+- 开放性、随机应变、冒险精神、适应能力、自主性、勇气
+
+## 人格类型
+
+| 类型 | 特征组合 |
+|------|----------|
+| 深沉的艺术家 | 内倾 + 创造 + 情感深度 |
+| 冷静的思考者 | 理性 + 分析 + 独立 |
+| 温暖的治愈者 | 共情 + 协作 + 归属 |
+| 闪耀的领导者 | 外倾 + 主见 + 领导 |
+| 自由的探索者 | 开放 + 随机 + 创造 |
+| 乐观的战士 | 韧性 + 乐观 + 适应 |
+| 沉稳的智者 | 内敛 + 理性 + 严谨 |
+| 敏感的诗人 | 深度 + 敏感 + 内省 |
+
+## 开发命令
+
+```bash
+# 安装依赖
+pnpm install
+
+# 开发环境（热更新）
+pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 启动生产服务
+pnpm start
+```
+
+## 评分规则
+- 每道题选项有多个维度得分加成
+- 初始分数 50 分，选项加成范围 5-10
+- 最终分数范围 0-100
+- 等级划分：L(偏低 <35)、M(适中 35-65)、H(偏高 >65)
+
+## 数据持久化
+- 答题进度自动保存到 localStorage
+- Key: `personality_quiz_progress`
+- 包含: answers 数组、currentQuestionIndex

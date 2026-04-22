@@ -1,0 +1,173 @@
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router';
+import { loadProgress, calculateDimensions, generatePersonalityResult, getDimensionDetails, clearProgress } from '../utils/calculator';
+
+export default function Result() {
+  const navigate = useNavigate();
+
+  const { result, dimensionGroups } = useMemo(() => {
+    const progress = loadProgress();
+    if (!progress) {
+      return {
+        result: null,
+        dimensionGroups: [],
+      };
+    }
+
+    const dimensions = calculateDimensions(progress.answers);
+    const personalityResult = generatePersonalityResult(dimensions);
+    const groups = getDimensionDetails(dimensions);
+
+    return {
+      result: personalityResult,
+      dimensionGroups: groups,
+    };
+  }, []);
+
+  const handleRestart = () => {
+    clearProgress();
+    navigate('/');
+  };
+
+  const handleShare = async () => {
+    const shareText = `我刚刚做了性格成分鉴定测试，结果是"${result?.title}"！你也来试试吧~`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '性格成分鉴定',
+          text: shareText,
+        });
+      } catch {
+        // 用户取消分享
+      }
+    } else {
+      // 复制到剪贴板
+      await navigator.clipboard.writeText(shareText);
+      alert('结果已复制到剪贴板！');
+    }
+  };
+
+  if (!result) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="text-center space-y-4">
+          <p className="text-gray-600">未找到测试结果</p>
+          <button
+            onClick={handleRestart}
+            className="px-6 py-2 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+          >
+            重新测试
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen pb-12">
+      {/* 顶部背景 */}
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4 py-12">
+        <div className="max-w-2xl mx-auto text-center text-white space-y-4">
+          <p className="text-sm uppercase tracking-widest text-gray-400">性格成分鉴定结果</p>
+          <h1 className="text-3xl md:text-4xl font-bold">{result.title}</h1>
+          <p className="text-lg text-gray-300">{result.subtitle}</p>
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto px-4 -mt-6 space-y-6">
+        {/* 人格描述卡片 */}
+        <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+          <p className="text-gray-700 leading-relaxed">{result.description}</p>
+          
+          {/* 毒舌点评 */}
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl border-l-4 border-gray-900">
+            <p className="text-gray-600 italic">{result.quote}</p>
+          </div>
+        </div>
+
+        {/* 维度详情 */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900">维度分析</h2>
+          
+          {dimensionGroups.map((group) => (
+            <div key={group.category} className="space-y-3">
+              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                {group.categoryName}
+              </h3>
+              <div className="grid gap-3">
+                {group.dimensions.map((dim) => (
+                  <div
+                    key={dim.name}
+                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900">{dim.name}</h4>
+                        <p className="text-sm text-gray-600 mt-1">{dim.description}</p>
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold ${
+                              dim.level === 'H'
+                                ? 'bg-green-100 text-green-700'
+                                : dim.level === 'L'
+                                ? 'bg-orange-100 text-orange-700'
+                                : 'bg-blue-100 text-blue-700'
+                            }`}
+                          >
+                            {dim.level}
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {dim.score}/100
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* 进度条 */}
+                    <div className="mt-3 h-2 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-500 ${
+                          dim.level === 'H'
+                            ? 'bg-green-500'
+                            : dim.level === 'L'
+                            ? 'bg-orange-500'
+                            : 'bg-blue-500'
+                        }`}
+                        style={{ width: `${dim.score}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 操作按钮 */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-4">
+          <button
+            onClick={handleShare}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            分享结果
+          </button>
+          <button
+            onClick={handleRestart}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-full font-medium border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            重新测试
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
