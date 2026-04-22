@@ -1,27 +1,20 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
-import { loadProgress, calculateDimensions, generatePersonalityResult, getDimensionDetails, clearProgress } from '../utils/calculator';
+import { loadProgress, calculateDimensions, generatePersonalityResult, clearProgress } from '../utils/calculator';
 
 export default function Result() {
   const navigate = useNavigate();
 
-  const { result, dimensionGroups } = useMemo(() => {
+  const result = useMemo(() => {
     const progress = loadProgress();
     if (!progress) {
-      return {
-        result: null,
-        dimensionGroups: [],
-      };
+      return null;
     }
 
     const dimensions = calculateDimensions(progress.answers);
     const personalityResult = generatePersonalityResult(dimensions);
-    const groups = getDimensionDetails(dimensions);
 
-    return {
-      result: personalityResult,
-      dimensionGroups: groups,
-    };
+    return personalityResult;
   }, []);
 
   const handleRestart = () => {
@@ -84,66 +77,6 @@ export default function Result() {
           <div className="mt-6 p-4 bg-amber-50 rounded-xl border-l-4 border-amber-600">
             <p className="text-gray-600 italic">{result.quote}</p>
           </div>
-        </div>
-
-        {/* 维度详情 */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900">维度分析</h2>
-          
-          {dimensionGroups.map((group) => (
-            <div key={group.category} className="space-y-3">
-              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
-                {group.categoryName}
-              </h3>
-              <div className="grid gap-3">
-                {group.dimensions.map((dim) => (
-                  <div
-                    key={dim.name}
-                    className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900">{dim.name}</h4>
-                        <p className="text-sm text-gray-600 mt-1">{dim.description}</p>
-                      </div>
-                      <div className="flex-shrink-0 text-right">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold ${
-                              dim.level === 'H'
-                                ? 'bg-green-100 text-green-700'
-                                : dim.level === 'L'
-                                ? 'bg-orange-100 text-orange-700'
-                                : 'bg-blue-100 text-blue-700'
-                            }`}
-                          >
-                            {dim.level}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {dim.score}/100
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* 进度条 */}
-                    <div className="mt-3 h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full transition-all duration-500 ${
-                          dim.level === 'H'
-                            ? 'bg-green-500'
-                            : dim.level === 'L'
-                            ? 'bg-orange-500'
-                            : 'bg-blue-500'
-                        }`}
-                        style={{ width: `${dim.score}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* 操作按钮 */}
