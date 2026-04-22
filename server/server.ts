@@ -36,16 +36,6 @@ async function startServer(): Promise<Server> {
   // 集成 Vite（开发模式）或静态文件服务（生产模式）
   await setupVite(app);
 
-  // 全局错误处理
-  app.use((err: Error, req: express.Request, res: express.Response) => {
-    console.error('Server error:', err);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const status = 'status' in err ? (err as any).status || 500 : 500;
-    res.status(status).json({
-      error: err.message || 'Internal server error',
-    });
-  });
-
   server.once('error', err => {
     console.error('Server error:', err);
     process.exit(1);
