@@ -35,7 +35,7 @@ export default function Result() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: '三国杀性格鉴定',
+          title: 'SGTI 三国杀人格测试',
           text: shareText,
         });
       } catch {
@@ -69,7 +69,7 @@ export default function Result() {
       {/* 顶部背景 */}
       <div className="bg-gradient-to-br from-amber-700 via-amber-600 to-amber-800 px-4 py-12">
         <div className="max-w-2xl mx-auto text-center text-white space-y-4">
-          <p className="text-sm uppercase tracking-widest text-amber-200">三国杀性格鉴定结果</p>
+          <p className="text-sm uppercase tracking-widest text-amber-200">SGTI 三国杀人格测试结果</p>
           <h1 className="text-3xl md:text-4xl font-bold">{result.title}</h1>
           <p className="text-lg text-amber-100">{result.subtitle}</p>
         </div>

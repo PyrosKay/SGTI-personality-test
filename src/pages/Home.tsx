@@ -23,7 +23,7 @@ export default function Home() {
         {/* 标题区域 */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
-            三国杀性格鉴定
+            SGTI 三国杀人格测试
           </h1>
           <p className="text-lg text-gray-600">
             通过 15 道情境题，发现你在三国杀中的真实人格
