@@ -1,10 +1,10 @@
-// 独立的生产服务器
-import express from 'express';
-import path from 'path';
-import { createServer } from 'http';
+// 独立的生产服务器 - 使用 CommonJS 避免 ESM 问题
+const express = require('express');
+const path = require('path');
+const http = require('http');
 
 const app = express();
-const server = createServer(app);
+const server = http.createServer(app);
 
 const distPath = path.resolve(process.cwd(), 'dist');
 
