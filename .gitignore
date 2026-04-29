@@ -66,3 +66,6 @@ Thumbs.db
 .vite/
 
 .coze-logs
+
+# Server scripts (not needed for static hosting)
+server/
