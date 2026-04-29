@@ -14,6 +14,7 @@ export interface PersonalityResult {
   subtitle: string;
   description: string;
   quote: string;
+  image?: string;
   dimensions: Dimension[];
 }
 

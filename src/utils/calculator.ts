@@ -209,6 +209,7 @@ interface PersonalityTypeDefinition {
   description: string;
   quote: string;
   traits: string[]; // 关联的特征
+  image?: string; // 配图路径
 }
 
 const personalityTypes: PersonalityTypeDefinition[] = [
@@ -219,6 +220,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是三国杀中最令人闻风丧胆的存在——神曹操。你深谙人性弱点，善于操控他人情绪，让对手在不知不觉中为你买单。你的一句"领导 先摸两张"就能让全场心态崩溃。你不是在玩三国杀，你是在玩心理战。',
     quote: '「要么全场是我的队友，要么全场都是我的工具人。」',
     traits: ['leadership', 'cunning', 'manipulative'],
+    image: '/characters/shencaocao.png',
   },
   {
     chineseName: '鲁肃',
@@ -243,6 +245,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是白日梦想家刘焉，立着图v的flag却做着丈八的梦。你的激情可以点燃全场，你的乐观可以感染队友，虽然经常翻车，但你的梦想从未熄灭。',
     quote: '「图！给我图！丈八蛇矛直取首级！」',
     traits: ['ambitious', 'passionate', 'dramatic'],
+    image: '/characters/liuyan.png',
   },
   {
     chineseName: '司马懿',
@@ -251,6 +254,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是忍辱负重的司马懿，擅长"死诸葛吓退活仲达"的戏码。你是场上的养生大师，能不动就不动，让对手先打。你是场上最靓的蹲子，也是最后的赢家。',
     quote: '「天命？不好意思，我自己就是天命。」',
     traits: ['patient', 'strategic', 'cunning'],
+    image: '/characters/simayi.jpeg',
   },
   {
     chineseName: '郭嘉',
@@ -267,6 +271,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是场上的操心命诸葛亮，既要观星又要空城，既要保核又要控底。你是天生的操心的妈沫，所有人的安全都是你的责任。',
     quote: '「你们都给我活着，我来断后！」',
     traits: ['caring', 'strategic', 'protective'],
+    image: '/characters/zhugeliang.png',
   },
   {
     chineseName: '华佗',
@@ -307,6 +312,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是稳健派代表费祎，回合开始回口血，回合结束再回口血。你不是最强的，但你一定是最稳的。你的存在就是让主公安心。',
     quote: '「来来来，都坐下，咱们慢慢耗。」',
     traits: ['balanced', 'protective', 'patient'],
+    image: '/characters/feiyi.png',
   },
   {
     chineseName: '刘禅',
@@ -323,6 +329,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是版本之子界徐盛，阴间到让对手想挂机。你是一刀999的代名词，让所有人闻风丧胆。你不是在玩游戏，你是在虐菜。',
     quote: '「大宝的刀，砍谁谁死，这还用解释吗？」',
     traits: ['aggressive', 'confident', 'powerful'],
+    image: '/characters/jixusheng.png',
   },
 ];
 
@@ -370,6 +377,7 @@ export function generatePersonalityResult(dimensions: Dimension[]): PersonalityR
     subtitle: bestMatch.subtitle,
     description: bestMatch.description,
     quote: bestMatch.quote,
+    image: bestMatch.image,
     dimensions,
   };
 }

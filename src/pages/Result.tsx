@@ -71,6 +71,15 @@ export default function Result() {
       <div className="max-w-2xl mx-auto px-4 -mt-6 space-y-6">
         {/* 人格描述卡片 */}
         <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+          {result.image && (
+            <div className="mb-4 flex justify-center">
+              <img
+                src={result.image}
+                alt={result.title}
+                className="w-32 h-32 object-cover rounded-xl shadow-md"
+              />
+            </div>
+          )}
           <p className="text-gray-700 leading-relaxed">{result.description}</p>
           
           {/* 毒舌点评 */}

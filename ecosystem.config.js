@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'sgti-quiz',
-    script: './dist-server/prod-server.js',
+    script: './dist-server/static-server.js',
     interpreter: 'node',
     instances: 1,
     autorestart: true,

@@ -12,7 +12,7 @@ const distPath = path.resolve(process.cwd(), 'dist');
 app.use(express.static(distPath));
 
 // SPA fallback
-app.use((_req, res) => {
+app.use((_req: express.Request, res: express.Response) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
