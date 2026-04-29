@@ -229,6 +229,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是三国杀中的"散财童子"鲁肃，乐善好施到让队友心惊肉跳。你的手牌就像流水一样往外送，美其名曰"联姻"，实则是纯纯的ATM体质。你是全场最想保护的人，也是全场最容易被集火的人。',
     quote: '「能帮就帮，能送就送，反正我死了你们也赢不了。」',
     traits: ['generous', 'caring', 'selfless'],
+    image: '/characters/lusu.png',
   },
   {
     chineseName: '祢衡',
@@ -237,6 +238,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是嘴强王者祢衡，一开口就是RAP，让敌人血压飙升。你的毒舌可以让任何人破防，你的嘴可以让整场游戏变成单口相声。你不是在输出伤害，你是在输出精神污染。',
     quote: '「诸葛村夫！司马老贼！江东鼠辈！」',
     traits: ['rebellious', 'confident', 'playful'],
+    image: '/characters/miheng.png',
   },
   {
     chineseName: '刘焉',
@@ -254,7 +256,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是忍辱负重的司马懿，擅长"死诸葛吓退活仲达"的戏码。你是场上的养生大师，能不动就不动，让对手先打。你是场上最靓的蹲子，也是最后的赢家。',
     quote: '「天命？不好意思，我自己就是天命。」',
     traits: ['patient', 'strategic', 'cunning'],
-    image: '/characters/simayi.jpeg',
+    image: '/characters/simayi.png',
   },
   {
     chineseName: '郭嘉',
@@ -263,6 +265,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是emo达人郭嘉，泪流满面却不忘给队友递牌。你的伤感可以写成诗，你的遗计可以定乾坤。你是天生的悲剧主角，也是最可靠的辅助。',
     quote: '「主公策马奔逃，嘉早为其备良马...我这是遗计，不是遗言啊！」',
     traits: ['emotional', 'strategic', 'tragic'],
+    image: '/characters/guojia.png',
   },
   {
     chineseName: '诸葛亮',
@@ -280,6 +283,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是神医华佗，场上行走的泉水，但是经常摸到丈八。你是所有人的守护神，也是最容易成为内奸针对的对象。你的存在就是让队友多一条命。',
     quote: '「伤筋动骨一百天，我给你治！」',
     traits: ['caring', 'generous', 'selfless'],
+    image: '/characters/huatuo.png',
   },
   {
     chineseName: '左慈',
@@ -288,6 +292,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是变化多端的左慈，场上化身最多，让对手摸不清你的身份。你是真正的花板子，每一局都是全新的体验。你的快乐来自于对手的懵逼。',
     quote: '「化身？让我想想用哪个身份搞你。」',
     traits: ['spontaneous', 'strategic', 'mischievous'],
+    image: '/characters/zuoci.png',
   },
   {
     chineseName: '孙尚香',
@@ -296,6 +301,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是牌差女王孙尚香，装备装到破产，牌堆摸到破产。你是场上最穷的人，也是输出最高的人。你的名言是：装备不穿，留着干嘛？',
     quote: '「联姻？先让我把装备换了再说！」',
     traits: ['aggressive', 'decisive', 'reckless'],
+    image: '/characters/sunshangxiang.png',
   },
   {
     chineseName: 'SP赵云',
@@ -304,6 +310,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是孤胆英雄SP赵云，怀里揣着七张牌就敢单挑全场。你的眼里没有队友，只有敌人。你是真正的独狼，也是全场最靓的冲锋战士。',
     quote: '「七张牌，够杀七个了，谁赞成？谁反对？」',
     traits: ['brave', 'independent', 'aggressive'],
+    image: '/characters/spzhaoyun.png',
   },
   {
     chineseName: '费祎',
@@ -321,6 +328,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     description: '你是全场最快乐的人刘禅，享乐流代表人物。管你什么身份，反正你有爹就行。你的快乐可以感染全场，你的傻笑可以气死内奸。',
     quote: '「嘿嘿嘿，有爹爹在，我怕谁！」',
     traits: ['optimistic', 'carefree', 'trusting'],
+    image: '/characters/liushan.png',
   },
   {
     chineseName: '界徐盛',
