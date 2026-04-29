@@ -76,7 +76,7 @@ export default function Result() {
               <img
                 src={result.image}
                 alt={result.title}
-                className="w-32 h-32 object-cover rounded-xl shadow-md"
+                className="w-48 h-48 object-cover rounded-xl shadow-md"
               />
             </div>
           )}
