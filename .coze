@@ -2,14 +2,13 @@
 requires = [ "nodejs-24" ]
 template = "vite"
 version = "0.0.18"
-appliedPatches = [ ]
 
 [dev]
-build = [ "bash", "./scripts/prepare.sh" ]
-run = [ "bash", "./scripts/dev.sh" ]
+build = [ "pnpm", "install" ]
+run = [ "pnpm", "dev" ]
 deps = [ "git" ]
 
 [deploy]
-build = [ "bash", "./scripts/build.sh" ]
-run = [ "bash", "./scripts/start.sh" ]
+build = [ "bash", "scripts/build.sh" ]
+run = [ "npx", "pm2", "start", "ecosystem.config.js" ]
 deps = [ "git" ]

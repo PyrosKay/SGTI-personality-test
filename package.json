@@ -31,6 +31,7 @@
     "esbuild": "^0.24.2",
     "eslint": "^9",
     "only-allow": "^1.2.2",
+    "pm2": "^6.0.14",
     "postcss": "^8.5.10",
     "tailwindcss": "^4.2.4",
     "tsup": "^8.3.5",
