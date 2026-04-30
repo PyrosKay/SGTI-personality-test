@@ -10,18 +10,12 @@ interface DimensionMeta {
 export const dimensionMeta: Record<string, DimensionMeta> = {
   // 自我维度
   leadership: { name: '领导力', category: 'self' },
-  confidence: { name: '自信', category: 'self' },
   rebellious: { name: '反叛精神', category: 'self' },
   independent: { name: '独立性', category: 'self' },
-  philosophical: { name: '哲学思维', category: 'self' },
-  humorous: { name: '幽默感', category: 'self' },
   rational: { name: '理性思维', category: 'self' },
-  analytical: { name: '分析能力', category: 'self' },
-  strategic: { name: '战略思维', category: 'self' },
-  persistent: { name: '坚持不懈', category: 'self' },
   competitive: { name: '竞争意识', category: 'self' },
   ambitious: { name: '雄心壮志', category: 'self' },
-  
+
   // 情感维度
   empathetic: { name: '共情能力', category: 'emotion' },
   peaceful: { name: '平和心态', category: 'emotion' },
@@ -29,50 +23,36 @@ export const dimensionMeta: Record<string, DimensionMeta> = {
   sensitive: { name: '敏感细腻', category: 'emotion' },
   passionate: { name: '热情似火', category: 'emotion' },
   dramatic: { name: '戏剧性', category: 'emotion' },
-  authentic: { name: '真实自我', category: 'emotion' },
-  resilient: { name: '心理韧性', category: 'emotion' },
-  stoic: { name: '坚韧克制', category: 'emotion' },
   tragic: { name: '悲剧色彩', category: 'emotion' },
-  romantic: { name: '浪漫主义', category: 'emotion' },
-  tough: { name: '坚强硬朗', category: 'emotion' },
-  
+
   // 社交维度
-  social: { name: '社交能力', category: 'social' },
-  extroverted: { name: '外向性格', category: 'social' },
-  introverted: { name: '内向性格', category: 'social' },
-  loyal: { name: '忠诚可靠', category: 'social' },
   collaborative: { name: '协作精神', category: 'social' },
   heroic: { name: '英雄气概', category: 'social' },
   playful: { name: '玩世不恭', category: 'social' },
   mischievous: { name: '调皮捣蛋', category: 'social' },
   caring: { name: '关心他人', category: 'social' },
-  selective: { name: '选择性社交', category: 'social' },
-  teamwork: { name: '团队意识', category: 'social' },
-  coordinated: { name: '协调能力', category: 'social' },
-  
+  selfless: { name: '无私奉献', category: 'social' },
+
   // 应对维度
   spontaneous: { name: '随性而为', category: 'stress' },
   adventurous: { name: '冒险精神', category: 'stress' },
   balanced: { name: '平衡之道', category: 'stress' },
   pragmatic: { name: '务实主义', category: 'stress' },
   brave: { name: '勇敢无畏', category: 'stress' },
-  tactical: { name: '战术灵活', category: 'stress' },
   defensive: { name: '防守意识', category: 'stress' },
   cautious: { name: '谨慎小心', category: 'stress' },
   optimistic: { name: '乐观心态', category: 'stress' },
   accepting: { name: '接受放下', category: 'stress' },
   cunning: { name: '狡黠机敏', category: 'stress' },
-  opportunistic: { name: '抓住机会', category: 'stress' },
   witty: { name: '机智俏皮', category: 'stress' },
   decisive: { name: '果断决策', category: 'stress' },
   impulsive: { name: '冲动行事', category: 'stress' },
   deliberate: { name: '深思熟虑', category: 'stress' },
   determined: { name: '决心坚定', category: 'stress' },
-  principled: { name: '有原则', category: 'stress' },
-  wise: { name: '睿智通透', category: 'stress' },
   carefree: { name: '无忧无虑', category: 'stress' },
-  practical: { name: '务实实际', category: 'stress' },
-  resigned: { name: '顺其自然', category: 'stress' },
+  patient: { name: '耐心隐忍', category: 'stress' },
+  protective: { name: '保护欲', category: 'stress' },
+  aggressive: { name: '攻击性', category: 'stress' },
 };
 
 // 计算所有维度的得分
@@ -350,39 +330,64 @@ const personalityTypes: PersonalityTypeDefinition[] = [
   },
 ];
 
+// 预计算每个人格的最大可能得分（用于归一化）
+const personalityMaxTotals: Record<string, number> = {};
+for (const p of personalityTypes) {
+  let maxTotal = 0;
+  for (const q of questions) {
+    let qMax = 0;
+    for (const opt of q.options) {
+      let bestTraitScore = 0;
+      for (const t of p.traits) {
+        bestTraitScore = Math.max(bestTraitScore, opt.effects[t] || 0);
+      }
+      qMax = Math.max(qMax, bestTraitScore);
+    }
+    maxTotal += qMax;
+  }
+  personalityMaxTotals[p.chineseName] = maxTotal;
+}
+
 // 生成人格结果
 export function generatePersonalityResult(dimensions: Dimension[]): PersonalityResult {
-  // 计算各特征得分
+  // 计算各维度得分
   const dimensionScores: Record<string, number> = {};
   for (const dim of dimensions) {
     dimensionScores[dim.id] = dim.score;
   }
 
-  // 根据特征计算每个人格的匹配度
-  // 新逻辑：直接比较每个人格 traits 的平均得分，得分越高说明用户越倾向该人格
+  // 归一化直接人格评分：
+  // 1. 每道题对每个人格只取最高匹配的单个trait分数（避免双倍加成）
+  // 2. 累加25道题得分
+  // 3. 除以该人格的maxTotal进行归一化
+  // 4. 取归一化得分最高的人格
   let bestMatch = personalityTypes[0];
-  let highestScore = -1;
+  let highestNormScore = -1;
 
   for (const personType of personalityTypes) {
     let totalScore = 0;
-    let matchCount = 0;
 
-    for (const trait of personType.traits) {
-      if (dimensionScores[trait] !== undefined) {
-        totalScore += dimensionScores[trait];
-        matchCount++;
+    for (const q of questions) {
+      // 找到本题中对应该人格的最佳选项（最高匹配单个trait）
+      let qBestScore = 0;
+      for (const opt of q.options) {
+        let bestTraitScore = 0;
+        for (const t of personType.traits) {
+          bestTraitScore = Math.max(bestTraitScore, opt.effects[t] || 0);
+        }
+        qBestScore = Math.max(qBestScore, bestTraitScore);
       }
-      // 未在题目中出现的 trait 跳过（不计入匹配）
+      totalScore += qBestScore;
     }
 
-    if (matchCount > 0) {
-      const avgScore = totalScore / matchCount;
-      // 仅在平局时添加极小的随机扰动，不影响正常匹配
-      const tiebreaker = Math.random() * 0.5;
-      if (avgScore + tiebreaker > highestScore) {
-        highestScore = avgScore + tiebreaker;
-        bestMatch = personType;
-      }
+    const maxTotal = personalityMaxTotals[personType.chineseName] || 1;
+    const normScore = totalScore / maxTotal;
+
+    // 仅在平局时添加极小的随机扰动
+    const tiebreaker = Math.random() * 0.001;
+    if (normScore + tiebreaker > highestNormScore) {
+      highestNormScore = normScore + tiebreaker;
+      bestMatch = personType;
     }
   }
 

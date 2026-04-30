@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any */
 // 独立的生产服务器 - 使用 CommonJS 避免 ESM 问题
 const express = require('express');
 const path = require('path');
@@ -12,7 +13,7 @@ const distPath = path.resolve(process.cwd(), 'dist');
 app.use(express.static(distPath));
 
 // SPA fallback
-app.use((_req: express.Request, res: express.Response) => {
+app.use((_req: any, res: any) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
