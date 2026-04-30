@@ -1,11 +1,28 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router';
-import { loadProgress, calculateDimensions, generatePersonalityResult, clearProgress } from '../utils/calculator';
+import { useNavigate, useParams } from 'react-router';
+import { loadProgress, calculateDimensions, generatePersonalityResult, clearProgress, personalityTypes } from '../utils/calculator';
 
 export default function Result() {
   const navigate = useNavigate();
+  const { code } = useParams<{ code?: string }>();
 
   const result = useMemo(() => {
+    // Preview mode: directly show personality by code
+    if (code) {
+      const person = personalityTypes.find(p => p.subtitle === code);
+      if (person) {
+        return {
+          type: person.chineseName,
+          title: `${person.chineseName} · ${person.englishName}`,
+          subtitle: person.subtitle,
+          description: person.description,
+          quote: person.quote,
+          image: person.image,
+          dimensions: [],
+        };
+      }
+    }
+
     const progress = loadProgress();
     if (!progress) {
       return null;
@@ -15,7 +32,7 @@ export default function Result() {
     const personalityResult = generatePersonalityResult(dimensions);
 
     return personalityResult;
-  }, []);
+  }, [code]);
 
   const handleRestart = () => {
     clearProgress();

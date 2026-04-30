@@ -192,7 +192,7 @@ interface PersonalityTypeDefinition {
   image?: string; // 配图路径
 }
 
-const personalityTypes: PersonalityTypeDefinition[] = [
+export const personalityTypes: PersonalityTypeDefinition[] = [
   {
     chineseName: '神曹操',
     englishName: 'PUA大师',
