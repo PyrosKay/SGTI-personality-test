@@ -12,8 +12,8 @@ module.exports = {
       NODE_ENV: 'production',
       PORT: 5000
     },
-    error_file: '/app/work/logs/bypass/pm2-error.log',
-    out_file: '/app/work/logs/bypass/pm2-out.log',
+    error_file: '/tmp/pm2-error.log',
+    out_file: '/tmp/pm2-out.log',
     log_date_format: 'YYYY-MM-DD HH:mm:ss'
   }]
 };
