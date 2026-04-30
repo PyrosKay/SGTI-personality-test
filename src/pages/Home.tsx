@@ -34,7 +34,7 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8">
           {[
             { emoji: 'SEXY', label: '尤物' },
-            { emoji: '1in1out', label: '孤勇者' },
+            { emoji: '7in7out', label: '孤勇者' },
             { emoji: 'RAP', label: '西海岸' },
             { emoji: 'F1', label: '极品费车' },
           ].map((item) => (
