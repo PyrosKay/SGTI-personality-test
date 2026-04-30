@@ -26,17 +26,17 @@ export default function Home() {
             SGTI 三国杀人格测试
           </h1>
           <p className="text-lg text-gray-600">
-            通过 20 道情境题，发现你在三国杀中的真实人格
+            通过25道情境题，发现你在三国杀中的真实人格
           </p>
         </div>
 
         {/* 人格类型预览 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8">
           {[
-            { emoji: '♠', label: 'PUA大师' },
-            { emoji: 'ATM', label: '送钱者' },
+            { emoji: 'SEXY', label: '尤物' },
+            { emoji: '1in1out', label: '孤勇者' },
             { emoji: 'RAP', label: '西海岸' },
-            { emoji: 'DREAM', label: '梦想家' },
+            { emoji: 'F1', label: '极品费车' },
           ].map((item) => (
             <div
               key={item.label}
