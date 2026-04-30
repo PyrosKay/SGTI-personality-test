@@ -69,6 +69,16 @@ export default function Result() {
         allowTaint: true,
         backgroundColor: '#F5F0E8',
         logging: false,
+        onclone: (clonedDoc) => {
+          const el = clonedDoc.getElementById('share-card');
+          if (el) {
+            (el as HTMLElement).style.position = 'static';
+            (el as HTMLElement).style.left = 'auto';
+            (el as HTMLElement).style.top = 'auto';
+            (el as HTMLElement).style.opacity = '1';
+            (el as HTMLElement).style.visibility = 'visible';
+          }
+        },
       });
       const link = document.createElement('a');
       link.download = `三国杀人格测试_${result.type || '结果'}.png`;
@@ -161,6 +171,7 @@ export default function Result() {
 
       {/* 隐藏的分享卡片 - 用于生成图片 */}
       <div
+        id="share-card"
         ref={shareCardRef}
         style={{
           position: 'fixed',
@@ -168,11 +179,13 @@ export default function Result() {
           top: 0,
           width: '375px',
           fontFamily: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif',
+          opacity: 0,
+          pointerEvents: 'none',
         }}
       >
-        <div style={{ width: '375px', background: '#F5F0E8', paddingBottom: '28px' }}>
-          {/* 顶部栏 - 使用float避免absolute错位 */}
-          <div style={{ padding: '16px 20px 12px', overflow: 'hidden' }}>
+        <div style={{ width: '375px', background: '#F5F0E8', padding: '16px 20px 28px', boxSizing: 'border-box' }}>
+          {/* 顶部栏 */}
+          <div style={{ overflow: 'hidden', marginBottom: '12px' }}>
             <div style={{ float: 'left' }}>
               <span style={{
                 display: 'inline-block',
@@ -199,35 +212,35 @@ export default function Result() {
           </div>
 
           {/* 主标题 */}
-          <div style={{ textAlign: 'center', padding: '0 20px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '8px' }}>
             <h2 style={{ fontSize: '16px', fontWeight: 'bold', color: '#1a1a1a', margin: 0 }}>三国杀人格测试结果</h2>
             <div style={{ width: '90%', height: '1px', background: '#1a1a1a', margin: '8px auto 0' }} />
           </div>
 
           {/* 超大代码 */}
-          <div style={{ textAlign: 'center', padding: '12px 20px 8px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4px' }}>
             <p style={{
               fontSize: '56px',
               fontWeight: 900,
               color: '#1a1a1a',
               margin: 0,
-              lineHeight: 1,
+              lineHeight: 1.1,
               letterSpacing: '2px',
             }}>
               {result.subtitle}
             </p>
           </div>
 
-          {/* 人物配图 - 去掉固定高度和object-fit，让图片自然比例显示 */}
+          {/* 人物配图 - 使用borderRight替代absolute橙色条 */}
           {result.image && (
-            <div style={{ padding: '0 20px', textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', marginBottom: '10px' }}>
               <div style={{
                 display: 'inline-block',
                 border: '3px solid #1a1a1a',
+                borderRight: '6px solid #F97316',
                 borderRadius: '12px',
                 background: '#ffffff',
                 overflow: 'hidden',
-                position: 'relative',
                 maxWidth: '335px',
               }}>
                 <img
@@ -235,27 +248,17 @@ export default function Result() {
                   alt={result.title}
                   crossOrigin="anonymous"
                   style={{
-                    width: '329px',
+                    width: '327px',
                     height: 'auto',
                     display: 'block',
-                    padding: '0',
                   }}
                 />
-                {/* 右侧橙色装饰条 - 紧跟图片高度 */}
-                <div style={{
-                  position: 'absolute',
-                  right: '0',
-                  top: '0',
-                  width: '6px',
-                  height: '100%',
-                  background: '#F97316',
-                }} />
               </div>
             </div>
           )}
 
           {/* 人物和人格标签 */}
-          <div style={{ padding: '16px 20px 0', textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', marginBottom: '10px' }}>
             <div style={{ display: 'inline-block', marginRight: '8px', marginBottom: '6px' }}>
               <span style={{
                 display: 'inline-block',
@@ -284,8 +287,8 @@ export default function Result() {
             </div>
           </div>
 
-          {/* 金句 - 去掉absolute引号，改用普通行内元素 */}
-          <div style={{ padding: '16px 20px 0' }}>
+          {/* 金句 */}
+          <div style={{ marginBottom: '10px' }}>
             <div style={{
               width: '335px',
               margin: '0 auto',
@@ -304,7 +307,7 @@ export default function Result() {
           </div>
 
           {/* 人格深度解析 */}
-          <div style={{ padding: '16px 20px 0' }}>
+          <div style={{ marginBottom: '10px' }}>
             <div style={{
               width: '335px',
               margin: '0 auto',
@@ -351,7 +354,7 @@ export default function Result() {
           </div>
 
           {/* 底部提示 */}
-          <div style={{ padding: '20px 20px 0', textAlign: 'center' }}>
+          <div style={{ textAlign: 'center' }}>
             <span style={{
               display: 'inline-block',
               padding: '6px 16px',
