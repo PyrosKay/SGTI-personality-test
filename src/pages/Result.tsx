@@ -117,7 +117,7 @@ export default function Result() {
               <img
                 src={result.image}
                 alt={result.title}
-                className="w-64 h-64 object-contain drop-shadow-lg"
+                className="w-80 h-80 object-contain drop-shadow-lg"
               />
             </div>
           )}
@@ -235,10 +235,10 @@ export default function Result() {
                   alt={result.title}
                   crossOrigin="anonymous"
                   style={{
-                    width: '319px',
+                    width: '329px',
                     height: 'auto',
                     display: 'block',
-                    padding: '8px',
+                    padding: '0',
                   }}
                 />
                 {/* 右侧橙色装饰条 - 紧跟图片高度 */}
