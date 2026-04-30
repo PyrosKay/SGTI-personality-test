@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import html2canvas from 'html2canvas';
 import { loadProgress, calculateDimensions, generatePersonalityResult, clearProgress, personalityTypes } from '../utils/calculator';
@@ -38,6 +38,15 @@ export default function Result() {
     return personalityResult;
   }, [code]);
 
+  // Preload share card image
+  useEffect(() => {
+    if (result?.image) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = result.image;
+    }
+  }, [result?.image]);
+
   const handleRestart = () => {
     clearProgress();
     navigate('/');
@@ -51,7 +60,7 @@ export default function Result() {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: null,
+        backgroundColor: '#F5F0E8',
       });
       const link = document.createElement('a');
       link.download = `三国杀人格测试_${result.type || '结果'}.png`;
@@ -150,90 +159,230 @@ export default function Result() {
           left: '-9999px',
           top: 0,
           width: '375px',
+          fontFamily: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif',
         }}
       >
-        <div
-          style={{
-            width: '375px',
-            padding: '32px 28px',
-            background: 'linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%)',
-            textAlign: 'center',
-          }}
-        >
-          {/* 顶部标题 */}
-          <p style={{ fontSize: '12px', color: '#fcd34d', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 20px 0' }}>
-            SGTI 三国杀人格测试
-          </p>
+        <div style={{ width: '375px', background: '#F5F0E8', paddingBottom: '24px' }}>
+          {/* 顶部栏 */}
+          <div style={{ padding: '16px 20px 8px', position: 'relative' }}>
+            <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+              <span style={{
+                display: 'inline-block',
+                width: '10px',
+                height: '10px',
+                background: '#F97316',
+                marginRight: '6px',
+                verticalAlign: 'middle',
+              }} />
+              <span style={{ fontSize: '10px', color: '#1a1a1a', fontWeight: 600, letterSpacing: '1px', verticalAlign: 'middle' }}>
+                SGTI PERSONALITY TEST
+              </span>
+            </div>
+            <div style={{ position: 'absolute', right: '20px', top: '16px', textAlign: 'right' }}>
+              <span style={{ fontSize: '10px', color: '#1a1a1a', fontWeight: 600 }}>NO. 001</span>
+              <div style={{ marginTop: '2px' }}>
+                <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a', marginRight: '3px' }} />
+                <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a', marginRight: '3px' }} />
+                <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a', marginRight: '3px' }} />
+                <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a' }} />
+              </div>
+            </div>
+          </div>
 
-          {/* 人格图片 */}
-          {result.image && (
-            <img
-              src={result.image}
-              alt={result.title}
-              crossOrigin="anonymous"
-              style={{
-                width: '180px',
-                height: 'auto',
-                maxHeight: '220px',
-                objectFit: 'contain',
-                marginBottom: '16px',
-              }}
-            />
-          )}
+          {/* 主标题 */}
+          <div style={{ textAlign: 'center', padding: '0 20px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: 'bold', color: '#1a1a1a', margin: 0 }}>三国杀人格测试结果</h2>
+            <div style={{ width: '90%', height: '1px', background: '#1a1a1a', margin: '8px auto 0' }} />
+          </div>
 
-          {/* 人格名称 */}
-          <h2 style={{ fontSize: '30px', fontWeight: 'bold', color: '#ffffff', margin: '0 0 4px 0', textAlign: 'center' }}>
-            {result.title}
-          </h2>
-
-          {/* 中文称号 */}
-          <p style={{ fontSize: '16px', color: '#fcd34d', margin: '0 0 4px 0', fontWeight: 500 }}>
-            {result.tag}
-          </p>
-
-          {/* 代码 */}
-          <p style={{ fontSize: '14px', color: '#fde68a', margin: '0 0 20px 0', fontFamily: 'monospace' }}>
-            {result.subtitle}
-          </p>
-
-          {/* 金句 */}
-          <div
-            style={{
-              width: '100%',
-              padding: '14px 16px',
-              background: 'rgba(255,255,255,0.12)',
-              borderRadius: '8px',
-              marginBottom: '16px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <p style={{ fontSize: '14px', color: '#ffffff', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
-              {result.quote}
+          {/* 超大代码 */}
+          <div style={{ textAlign: 'center', padding: '12px 20px 8px' }}>
+            <p style={{
+              fontSize: '56px',
+              fontWeight: 900,
+              color: '#1a1a1a',
+              margin: 0,
+              lineHeight: 1,
+              letterSpacing: '2px',
+            }}>
+              {result.subtitle}
             </p>
           </div>
 
-          {/* 简短描述 */}
-          <p
-            style={{
-              fontSize: '13px',
-              color: '#fde68a',
-              lineHeight: 1.7,
-              textAlign: 'center',
-              margin: '0 0 20px 0',
-              padding: '0 8px',
-            }}
-          >
-            {result.description.slice(0, 80)}...
-          </p>
+          {/* 人物配图 */}
+          {result.image && (
+            <div style={{ padding: '0 20px', textAlign: 'center' }}>
+              <div style={{
+                width: '335px',
+                height: '200px',
+                margin: '0 auto',
+                border: '3px solid #1a1a1a',
+                borderRadius: '12px',
+                background: '#ffffff',
+                position: 'relative',
+                overflow: 'hidden',
+              }}>
+                {/* 右侧橙色装饰条 */}
+                <div style={{
+                  position: 'absolute',
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: '6px',
+                  background: '#F97316',
+                }} />
+                <img
+                  src={result.image}
+                  alt={result.title}
+                  crossOrigin="anonymous"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    padding: '8px 14px 8px 8px',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
-          {/* 底部 */}
-          <div>
-            <p style={{ fontSize: '11px', color: '#fcd34d', margin: 0, opacity: 0.8 }}>
-              扫码测试，发现你的三国杀人格
-            </p>
-            <p style={{ fontSize: '10px', color: '#fde68a', margin: '4px 0 0 0', opacity: 0.6 }}>
-              测试结果无科学依据，仅供娱乐
-            </p>
+          {/* 人物和人格标签 */}
+          <div style={{ padding: '16px 20px 0', textAlign: 'center' }}>
+            <div style={{ display: 'inline-block', marginRight: '8px' }}>
+              <span style={{
+                display: 'inline-block',
+                padding: '6px 16px',
+                background: '#1a1a1a',
+                color: '#ffffff',
+                borderRadius: '20px',
+                fontSize: '13px',
+                fontWeight: 700,
+              }}>
+                人物：{result.type}
+              </span>
+            </div>
+            <div style={{ display: 'inline-block' }}>
+              <span style={{
+                display: 'inline-block',
+                padding: '6px 16px',
+                background: '#F97316',
+                color: '#1a1a1a',
+                borderRadius: '20px',
+                fontSize: '13px',
+                fontWeight: 700,
+              }}>
+                人格：{result.tag}
+              </span>
+            </div>
+          </div>
+
+          {/* 金句 */}
+          <div style={{ padding: '16px 20px 0' }}>
+            <div style={{
+              width: '335px',
+              margin: '0 auto',
+              padding: '18px 20px',
+              background: '#1a1a1a',
+              borderRadius: '12px',
+              boxShadow: '4px 4px 0px rgba(0,0,0,0.1)',
+              position: 'relative',
+              boxSizing: 'border-box',
+            }}>
+              {/* 左侧橙色引号 */}
+              <span style={{
+                position: 'absolute',
+                left: '12px',
+                top: '8px',
+                fontSize: '28px',
+                color: '#F97316',
+                fontWeight: 900,
+                lineHeight: 1,
+              }}>"</span>
+              <p style={{
+                fontSize: '15px',
+                color: '#ffffff',
+                fontWeight: 700,
+                margin: 0,
+                lineHeight: 1.6,
+                textAlign: 'center',
+                padding: '0 16px',
+              }}>
+                {result.quote}
+              </p>
+              {/* 右侧灰色引号 */}
+              <span style={{
+                position: 'absolute',
+                right: '12px',
+                bottom: '4px',
+                fontSize: '28px',
+                color: '#9CA3AF',
+                fontWeight: 900,
+                lineHeight: 1,
+              }}>"</span>
+            </div>
+          </div>
+
+          {/* 人格深度解析 */}
+          <div style={{ padding: '16px 20px 0' }}>
+            <div style={{
+              width: '335px',
+              margin: '0 auto',
+              border: '1.5px solid #1a1a1a',
+              borderRadius: '12px',
+              background: '#ffffff',
+              padding: '16px',
+              boxSizing: 'border-box',
+            }}>
+              {/* 标题栏 */}
+              <div style={{ position: 'relative', paddingBottom: '10px' }}>
+                <span style={{
+                  display: 'inline-block',
+                  width: '8px',
+                  height: '8px',
+                  background: '#F97316',
+                  borderRadius: '50%',
+                  marginRight: '6px',
+                  verticalAlign: 'middle',
+                }} />
+                <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#1a1a1a', verticalAlign: 'middle' }}>
+                  人格深度解析
+                </span>
+                <span style={{
+                  fontSize: '10px',
+                  color: '#9CA3AF',
+                  marginLeft: '8px',
+                  verticalAlign: 'middle',
+                  fontWeight: 600,
+                }}>
+                  / ANALYSIS
+                </span>
+                <div style={{ width: '100%', height: '1px', background: '#1a1a1a', marginTop: '8px' }} />
+              </div>
+              {/* 描述文字 */}
+              <p style={{
+                fontSize: '12px',
+                color: '#374151',
+                lineHeight: 1.8,
+                margin: '10px 0 0 0',
+              }}>
+                {result.description}
+              </p>
+            </div>
+          </div>
+
+          {/* 底部提示 */}
+          <div style={{ padding: '16px 20px 0', textAlign: 'center' }}>
+            <span style={{
+              display: 'inline-block',
+              padding: '6px 16px',
+              background: '#E5E7EB',
+              color: '#6B7280',
+              borderRadius: '16px',
+              fontSize: '11px',
+            }}>
+              测试结果无科学依据，仅供娱乐！
+            </span>
           </div>
         </div>
       </div>
