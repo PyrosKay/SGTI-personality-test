@@ -16,7 +16,7 @@ export default function Result() {
       if (person) {
         return {
           type: person.chineseName,
-          title: `${person.chineseName} · ${person.englishName}`,
+          title: person.chineseName,
           subtitle: person.subtitle,
           tag: person.englishName,
           description: person.description,
