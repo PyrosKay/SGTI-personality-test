@@ -395,6 +395,7 @@ export function generatePersonalityResult(dimensions: Dimension[]): PersonalityR
     type: bestMatch.chineseName,
     title: bestMatch.chineseName,
     subtitle: bestMatch.subtitle,
+    tag: bestMatch.englishName,
     description: bestMatch.description,
     quote: bestMatch.quote,
     image: bestMatch.image,

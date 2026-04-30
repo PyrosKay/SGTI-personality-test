@@ -12,6 +12,7 @@ export interface PersonalityResult {
   type: string;
   title: string;
   subtitle: string;
+  tag: string;
   description: string;
   quote: string;
   image?: string;

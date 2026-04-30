@@ -81,7 +81,8 @@ export default function Result() {
         <div className="max-w-2xl mx-auto text-center text-white space-y-4">
           <p className="text-sm uppercase tracking-widest text-amber-200">SGTI 三国杀人格测试结果</p>
           <h1 className="text-3xl md:text-4xl font-bold">{result.title}</h1>
-          <p className="text-lg text-amber-100">{result.subtitle}</p>
+          <p className="text-base text-amber-200 font-medium">{result.tag}</p>
+          <p className="text-sm text-amber-300/80 font-mono">{result.subtitle}</p>
         </div>
       </div>
 
