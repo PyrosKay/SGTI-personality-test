@@ -155,16 +155,13 @@ export default function Result() {
         <div
           style={{
             width: '375px',
-            padding: '40px 24px',
+            padding: '32px 28px',
             background: 'linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '16px',
+            textAlign: 'center',
           }}
         >
           {/* 顶部标题 */}
-          <p style={{ fontSize: '12px', color: '#fcd34d', letterSpacing: '2px', textTransform: 'uppercase', margin: 0 }}>
+          <p style={{ fontSize: '12px', color: '#fcd34d', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 20px 0' }}>
             SGTI 三国杀人格测试
           </p>
 
@@ -175,25 +172,27 @@ export default function Result() {
               alt={result.title}
               crossOrigin="anonymous"
               style={{
-                width: '200px',
-                height: '200px',
+                width: '180px',
+                height: 'auto',
+                maxHeight: '220px',
                 objectFit: 'contain',
+                marginBottom: '16px',
               }}
             />
           )}
 
           {/* 人格名称 */}
-          <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#ffffff', margin: 0, textAlign: 'center' }}>
+          <h2 style={{ fontSize: '30px', fontWeight: 'bold', color: '#ffffff', margin: '0 0 4px 0', textAlign: 'center' }}>
             {result.title}
           </h2>
 
           {/* 中文称号 */}
-          <p style={{ fontSize: '16px', color: '#fcd34d', margin: 0, fontWeight: 500 }}>
+          <p style={{ fontSize: '16px', color: '#fcd34d', margin: '0 0 4px 0', fontWeight: 500 }}>
             {result.tag}
           </p>
 
           {/* 代码 */}
-          <p style={{ fontSize: '14px', color: '#fde68a', margin: 0, fontFamily: 'monospace' }}>
+          <p style={{ fontSize: '14px', color: '#fde68a', margin: '0 0 20px 0', fontFamily: 'monospace' }}>
             {result.subtitle}
           </p>
 
@@ -201,10 +200,11 @@ export default function Result() {
           <div
             style={{
               width: '100%',
-              padding: '16px',
-              background: 'rgba(255,255,255,0.15)',
-              borderRadius: '12px',
-              borderLeft: '4px solid #fcd34d',
+              padding: '14px 16px',
+              background: 'rgba(255,255,255,0.12)',
+              borderRadius: '8px',
+              marginBottom: '16px',
+              boxSizing: 'border-box',
             }}
           >
             <p style={{ fontSize: '14px', color: '#ffffff', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
@@ -219,15 +219,15 @@ export default function Result() {
               color: '#fde68a',
               lineHeight: 1.7,
               textAlign: 'center',
-              margin: 0,
-              maxWidth: '320px',
+              margin: '0 0 20px 0',
+              padding: '0 8px',
             }}
           >
             {result.description.slice(0, 80)}...
           </p>
 
           {/* 底部 */}
-          <div style={{ marginTop: '8px', textAlign: 'center' }}>
+          <div>
             <p style={{ fontSize: '11px', color: '#fcd34d', margin: 0, opacity: 0.8 }}>
               扫码测试，发现你的三国杀人格
             </p>
