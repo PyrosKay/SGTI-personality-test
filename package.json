@@ -40,10 +40,6 @@
     "typescript-eslint": "^8",
     "vite": "5"
   },
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "pnpm": ">=9.0.0"
-  },
   "pnpm": {
     "overrides": {
       "esbuild": "0.24.2",
