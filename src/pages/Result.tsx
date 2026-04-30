@@ -72,20 +72,21 @@ export default function Result() {
         {/* 人格描述卡片 */}
         <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
           {result.image && (
-            <div className="mb-4 flex justify-center">
+            <div className="flex justify-center">
               <img
                 src={result.image}
                 alt={result.title}
-                className="w-48 h-48 object-cover rounded-xl shadow-md"
+                className="w-64 h-64 object-contain drop-shadow-lg"
               />
             </div>
           )}
-          <p className="text-gray-700 leading-relaxed">{result.description}</p>
-          
+
           {/* 毒舌点评 */}
-          <div className="mt-6 p-4 bg-amber-50 rounded-xl border-l-4 border-amber-600">
+          <div className="mt-5 p-4 bg-amber-50 rounded-xl border-l-4 border-amber-600">
             <p className="text-gray-600 italic">{result.quote}</p>
           </div>
+
+          <p className="mt-5 text-gray-700 leading-relaxed">{result.description}</p>
         </div>
 
         {/* 操作按钮 */}
