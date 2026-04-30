@@ -26,7 +26,7 @@ export default function Home() {
             SGTI 三国杀人格测试
           </h1>
           <p className="text-lg text-gray-600">
-            通过 15 道情境题，发现你在三国杀中的真实人格
+            通过 20 道情境题，发现你在三国杀中的真实人格
           </p>
         </div>
 

@@ -24,7 +24,7 @@ export const questions: Question[] = [
     text: '遇到不合理的规定时，你忍不住想要',
     options: [
       { text: '质疑或绕过去', effects: { rebellious: 8, independent: 10 } },
-      { text: '有时候这样', effects: { balanced: 10, pragmatic: 8 } },
+      { text: '偶尔妥协一下也没事', effects: { balanced: 10, pragmatic: 8 } },
       { text: '打破规则', effects: { rebellious: 10, brave: 8 } },
     ],
   },
@@ -90,6 +90,8 @@ export const questions: Question[] = [
       { text: '斗地主', effects: { competitive: 10, risktaking: 8 } },
       { text: '军八', effects: { social: 10, strategic: 8 } },
       { text: '2v2排位', effects: { teamwork: 10, coordinated: 8 } },
+      { text: '国战', effects: { strategic: 10, versatile: 8 } },
+      { text: '山河图', effects: { adventurous: 10, explorative: 8 } },
     ],
   },
   {
@@ -116,6 +118,7 @@ export const questions: Question[] = [
     options: [
       { text: '司马懿', effects: { patient: 10, cunning: 8 } },
       { text: '曹操', effects: { ambitious: 10, decisive: 8 } },
+      { text: '曹丕', effects: { calculating: 10, ambitious: 8 } },
       { text: '怎么可以根据直觉做选择呢', effects: { rational: 10, analytical: 8 } },
     ],
   },
@@ -126,6 +129,7 @@ export const questions: Question[] = [
       { text: '刘备白帝城托孤', effects: { tragic: 10, dramatic: 8 } },
       { text: '关羽千里走单骑', effects: { loyal: 10, heroic: 8 } },
       { text: '姜维一计害三贤', effects: { cunning: 10, tragic: 8 } },
+      { text: '周瑜打黄盖', effects: { collaborative: 10, sacrificial: 8 } },
     ],
   },
   {
@@ -144,6 +148,53 @@ export const questions: Question[] = [
       { text: '不惜一切代价寻找，直到找到', effects: { persistent: 10, determined: 8 } },
       { text: '相信总有一天它会回到你身边', effects: { optimistic: 10, peaceful: 8 } },
       { text: '伤心一段时间，然后放下', effects: { accepting: 10, resilient: 8 } },
+    ],
+  },
+  {
+    id: 'q16',
+    text: '你最希望收到的生日礼物是？',
+    options: [
+      { text: '丈八蛇矛', effects: { aggressive: 10, passionate: 8 } },
+      { text: '一顶草帽', effects: { carefree: 10, simple: 8 } },
+      { text: '传世玉玺', effects: { ambitious: 10, leadership: 8 } },
+      { text: '朱雀羽扇', effects: { strategic: 10, wise: 8 } },
+    ],
+  },
+  {
+    id: 'q17',
+    text: '一般来说，你更倾向于哪个阵营？',
+    options: [
+      { text: '吴国', effects: { social: 10, collaborative: 8 } },
+      { text: '蜀国', effects: { loyal: 10, passionate: 8 } },
+      { text: '魏国', effects: { ambitious: 10, strategic: 8 } },
+      { text: '群雄', effects: { independent: 10, rebellious: 8 } },
+    ],
+  },
+  {
+    id: 'q18',
+    text: '当要做出重要的决定时，你更倾向于怎么做呢？',
+    options: [
+      { text: '根据实际情况进行自己的考察与衡量', effects: { rational: 10, independent: 8 } },
+      { text: '参考好友、师长的建议，考虑他人的感受', effects: { social: 10, empathetic: 8 } },
+      { text: '用骰子来做决定吧！', effects: { spontaneous: 10, adventurous: 8 } },
+    ],
+  },
+  {
+    id: 'q19',
+    text: '不考虑其他情况，弃牌阶段你只能留下一张手牌时，你会留下？',
+    options: [
+      { text: '无懈可击', effects: { defensive: 10, strategic: 8 } },
+      { text: '闪', effects: { cautious: 10, protective: 8 } },
+      { text: '桃', effects: { caring: 10, selfless: 8 } },
+      { text: '酒', effects: { impulsive: 10, brave: 8 } },
+    ],
+  },
+  {
+    id: 'q20',
+    text: '不考虑其他情况，对手手牌数量较多的情况下向你打出【决斗】，此时你只有一张【杀】，你会？',
+    options: [
+      { text: '打出【杀】，博弈就是一场豪赌，万一他没有【杀】了呢', effects: { brave: 10, impulsive: 8 } },
+      { text: '不打出【杀】，保留手牌，挨打不是无力还手，而是迷惑对手的策略', effects: { strategic: 10, patient: 8 } },
     ],
   },
 ];

@@ -339,6 +339,15 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     traits: ['aggressive', 'confident', 'powerful'],
     image: '/characters/jixusheng.png',
   },
+  {
+    chineseName: '魔张飞',
+    englishName: '熹飞回宫',
+    subtitle: 'BACK',
+    description: '你是魔张飞，三国杀里最不讲道理的存在——因为你根本不需要道理。别人打牌靠算计，你打牌靠吼；别人出杀要考虑收益，你出杀纯粹因为手痒。你的咆哮不是技能，是你灵魂深处的呐喊：杀杀杀杀杀！你每一回合都是全场的焦点，不是因为你多厉害，而是因为你多吵。你不是在玩游戏，你是在释放天性。别人三思而后行，你三杀而后爽。你是那种打到残血还要追着对面砍的疯子，手牌只剩一张杀你也敢冲，因为你信奉一个道理——不出杀的手牌不是手牌，是废纸。生活中的你也是行动派的极致代表，想到什么立刻去做，谁拦你跟谁急。你的字典里没有"犹豫"这个词，因为在你看来，犹豫就意味着败北。',
+    quote: '「我从未见过如此厚颜无耻之人——等等，我才是那个最厚颜无耻的！」',
+    traits: ['aggressive', 'impulsive', 'brave', 'passionate'],
+    image: '/characters/mozhangfei.png',
+  },
 ];
 
 // 生成人格结果
