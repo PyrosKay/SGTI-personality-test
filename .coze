@@ -10,5 +10,5 @@ deps = [ "git" ]
 
 [deploy]
 build = [ "bash", "scripts/build.sh" ]
-run = [ "npx", "pm2", "start", "ecosystem.config.js" ]
+run = [ "node", "dist-server/server.js" ]
 deps = [ "git" ]
