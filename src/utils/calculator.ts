@@ -314,7 +314,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
   },
   {
     chineseName: '费祎',
-    englishName: '保核专家',
+    englishName: '极品费车',
     subtitle: 'F1',
     description: '你是稳健派代表费祎，回合开始回口血，回合结束再回口血。你不是最强的，但你一定是最稳的。你的存在就是让主公安心。',
     quote: '「来来来，都坐下，咱们慢慢耗。」',
