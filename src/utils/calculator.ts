@@ -219,7 +219,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'PUA-R',
     description: '你是三国杀中最令人闻风丧胆的存在——神曹操。选将阶段你就开始PUA了："兄弟们，有我在稳了。"然后在游戏里你用归心把全场手牌据为己有，美其名曰"帮大家保管"。你的队友还在等你分牌，结果你已经把他们的牌打完了。你深谙人性弱点，善于操控他人情绪，让对手在不知不觉中为你买单。你的一句"领导先摸两张"就能让全场心态崩溃，一句"我这是为了团队"就能让被你收割的队友哑口无言。你不是在玩三国杀，你是在玩心理战。生活中的你也是社交场上的操盘手，朋友聚餐你选餐厅，团建活动你定方案，连群聊话题都由你主导。别人觉得你强势，你只是觉得——你们不听我的，怎么赢？',
     quote: '「要么全场是我的队友，要么全场都是我的工具人。」',
-    traits: ['leadership', 'cunning', 'manipulative'],
+    traits: ['leadership', 'cunning', 'decisive'],
     image: '/characters/shencaocao.png',
   },
   {
@@ -228,7 +228,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'ATM-er',
     description: '你是三国杀中的"散财童子"鲁肃，乐善好施到让队友心惊肉跳。你的手牌就像流水一样往外送，美其名曰"联姻"，实则是纯纯的ATM体质。别人打三国杀是来赢的，你是来做慈善的。你的缔盟让对面感动到想给你发锦旗，你的好施让你自己的手牌比脸还干净。你是全场最想保护的人，也是全场最容易被集火的人——因为谁都知道，打你等于打两份收益。生活中的你也是朋友圈里的提款机，"我请""没事我来""这点小钱不算什么"是你的口头禅。月底看余额的时候你的表情和被乐不思蜀时一模一样——欲哭无泪但下次还敢。',
     quote: '「能帮就帮，能送就送，反正我死了你们也赢不了。」',
-    traits: ['generous', 'caring', 'selfless'],
+    traits: ['collaborative', 'empathetic', 'peaceful'],
     image: '/characters/lusu.png',
   },
   {
@@ -237,7 +237,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'RAP',
     description: '你是嘴强王者祢衡，一开口就是RAP，让敌人血压飙升。你的毒舌可以让任何人破防，你的嘴可以让整场游戏变成单口相声。你不是在输出伤害，你是在输出精神污染。狂才一开，全场都得听你的freestyle，每个人都被你点名diss一遍，连队友都躲着你走。你的舌剑比手里的杀还疼，毕竟杀只能掉血，你的嘴可以直接让人红温退群。生活中的你也是社交恐怖分子，谁敢跟你吵架谁就等着被降维打击。你不是故意刻薄，你只是觉得这世界需要更多真话——虽然你的真话比别人的人身攻击还狠。',
     quote: '「诸葛村夫！司马老贼！江东鼠辈！」',
-    traits: ['rebellious', 'confident', 'playful'],
+    traits: ['rebellious', 'witty', 'playful'],
     image: '/characters/miheng.png',
   },
   {
@@ -255,7 +255,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: '♠2-9',
     description: '你是忍辱负重的司马懿，场上最沉得住气的蹲子。别人急着出牌，你急着屯牌；别人忙着进攻，你忙着挨打。你的鬼才不是说说而已，是真能把对面耗到心态爆炸。你挨最毒的打，存最多的牌，翻最狠的盘。你是养生流大师，能不动就不动，让对手先打，打累了你再收割。你信奉"活着就是胜利"，别人眼里你是怂，你自己知道这叫战略性隐忍。反馈一亮，对面用牌都得掂量掂量；鬼才一出，你的手牌比你的未来还难以预测。生活中的你也是那种表面佛系、内心卷王的存在——看似什么都不争，实际上已经把每一步算好了。别人笑你太躺平，你笑别人看不穿。',
     quote: '「天命？不好意思，我自己就是天命。」',
-    traits: ['patient', 'strategic', 'cunning'],
+    traits: ['patient', 'pragmatic', 'cunning'],
     image: '/characters/simayi.png',
   },
   {
@@ -264,7 +264,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'EMO',
     description: '你是emo达人郭嘉，泪流满面却不忘给队友递牌。别人掉血是坏事，你掉血是战术——天妒英才不是白说的，每掉一滴血都是给队友送温暖。你的伤感可以写成诗，你的遗计可以定乾坤。你是天生的悲剧主角，也是最可靠的辅助。你活着的时候是全场最强智囊，你"走"了之后留下的遗产比活着还多——这让队友经常纠结到底该救你还是该让你赶紧"走"。你的人生就是一部文艺片，朋友圈永远是深夜emo文学，配图永远是黑白滤镜。但你骨子里比谁都温柔，嘴上说着"我没事"，手里已经把最好的牌递给了队友。',
     quote: '「主公策马奔逃，嘉早为其备良马...我这是遗计，不是遗言啊！」',
-    traits: ['emotional', 'strategic', 'tragic'],
+    traits: ['emotional', 'sensitive', 'tragic'],
     image: '/characters/guojia.png',
   },
   {
@@ -273,7 +273,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'MUM',
     description: '你是场上的操心命诸葛亮，所有人的妈沫。你既要观星看牌堆顶，又要空城骗对面杀，既要保核保主公，又要控底防内奸——你的手比千手观音还忙。别人玩三国杀是来爽的，你玩三国杀是来上班的。你的观星不是超能力，是你操碎了心的证明；你的空城不是从容，是你已经弹尽粮绝还要硬撑的倔强。你是全场的总指挥、大管家、安全员，谁的血量你都记着，谁的手牌你都在算。你的队友或许不记得你打了什么牌，但一定记得每次快死的时候，是你挡在了前面。生活中的你也是朋友圈的定海神针，群聊里永远是你提醒这提醒那，出行攻略永远是你做，迷路了大家都看向你——累是真累，但谁让你放不下心呢。',
     quote: '「你们都给我活着，我来断后！」',
-    traits: ['caring', 'strategic', 'protective'],
+    traits: ['caring', 'protective', 'rational'],
     image: '/characters/zhugeliang.png',
   },
   {
@@ -282,7 +282,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'CURE',
     description: '你是神医华佗，场上行走的泉水，队友的续命神器。你的急救让残血队友瞬间满血复活，你的青囊让全场都想去你那里挂号。然而讽刺的是，你经常摸到丈八蛇矛而不是红桃——明明是医生却总想当战士，这种职业错位感就是你的人生缩影。你是所有人的守护神，也是内奸最想先解决的眼中钉，毕竟有你在，他的击杀计划就永远完不成。你一边奶人一边吐槽："我是个医生不是坦克啊！"但下一秒还是默默挡在了队友前面。生活中的你也是那个永远在照顾别人的人，朋友生病你第一个送药，同事加班你第一个点外卖，但谁问你"你还好吗"的时候，你总是笑着说"没事没事"——因为你太习惯治愈别人，忘了自己也需要被治愈。',
     quote: '「伤筋动骨一百天，我给你治！」',
-    traits: ['caring', 'generous', 'selfless'],
+    traits: ['selfless', 'defensive', 'cautious'],
     image: '/characters/huatuo.png',
   },
   {
@@ -291,7 +291,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'SEXY',
     description: '你是变化多端的左慈，场上化身最多，让对手永远摸不清你的套路。你每一回合都是不同的角色，上一秒是忠臣下一秒就变成了反贼的模样——不是你善变，是你太全能。你是真正的花板子玩家，每一局都是全新的体验，别人需要选对将才能赢，你只需要化身对就行。你的快乐来自于对手的懵逼：他以为你在空城，结果你化身许褚一刀劈过来；他以为你要输出，结果你化身华佗开始奶人。跟你打牌就像拆盲盒，永远不知道下一秒会蹦出什么。生活中的你也是百变怪，今天搞艺术明天做投资，朋友圈的人设一天换三个。别人说你没有定性，你说这叫"多元宇宙版本的自己"——每一个都是真的你，但加在一起谁也看不懂。',
     quote: '「化身？让我想想用哪个身份搞你。」',
-    traits: ['spontaneous', 'strategic', 'mischievous'],
+    traits: ['spontaneous', 'mischievous', 'adventurous'],
     image: '/characters/zuoci.png',
   },
   {
@@ -300,7 +300,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'POOR',
     description: '你是牌差女王孙尚香，装备装到破产，换装换到手软。别人打牌靠脑子，你打牌靠换装——结姻一开，全场看着你把装备栏穿成衣柜，再把牌堆摸成你的私人衣橱。你的名言是"装备不穿留着干嘛"，于是你每回合的装备更换速度比时尚博主还快。你是场上最穷的人，也是输出最高的人；你花最少的钱，打最狠的仗。你的经济管理能力堪比月光族——钱到手就花，装备到手就穿，但谁也不能否认你穿的时候是真好看。生活中的你也是购物狂本狂，双十一预售第一天就开始算满减，收快递的速度比发工资还快。钱包空了？没关系，先把这件买了再说。',
     quote: '「联姻？先让我把装备换了再说！」',
-    traits: ['aggressive', 'decisive', 'reckless'],
+    traits: ['impulsive', 'competitive', 'decisive'],
     image: '/characters/sunshangxiang.png',
   },
   {
@@ -309,7 +309,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: '7in7out',
     description: '你是孤胆英雄SP赵云，怀里揣着七张牌就敢单挑全场的狠人。龙胆一开，杀当闪闪当杀，你的攻防转换比变脸还快。你的眼里没有队友，只有敌人——不是你不配合，是你一个人就够了。你是真正的独狼，也是全场最靓的冲锋战士。别人需要队友掩护、需要牌差计算、需要形势判断，你只需要一件事：冲。七进七出不是传说，是你的日常操作。你的打法就是最朴素的暴力美学——能动手绝不哔哔，能出杀绝不屯牌。生活中的你也是行动派，遇到问题从不犹豫，先干再说。别人还在分析利弊的时候，你已经冲上去把事情解决了。虽然偶尔会冲过头，但至少你从不后悔——因为你根本没时间后悔，下一个挑战已经来了。',
     quote: '「七张牌，够杀七个了，谁赞成？谁反对？」',
-    traits: ['brave', 'independent', 'aggressive'],
+    traits: ['brave', 'independent', 'heroic'],
     image: '/characters/spzhaoyun.png',
   },
   {
@@ -318,7 +318,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'F1',
     description: '你是稳健派代表费祎，三国杀界的极品费车——能扛能跑，稳如老狗。回合开始回口血，回合结束再回口血，你的血线稳得跟心电图直线一样让人安心。你不是最强的输出，不是最秀的操作，但你一定是最让人放心的存在。你的调稳让队友觉得"有你在就稳了"，你的守成让对手觉得"这人怎么打不死"。别人追求的是一波带走的爽感，你追求的是温水煮青蛙的耐力——最后赢不赢不重要，重要的是你永远是最后一个倒下的。生活中的你也是团队里那个靠谱到无聊的人，从不迟到从不缺席，永远提前十分钟到场。你的朋友们虽然觉得你缺乏激情，但每次出事第一个想到的永远是你。',
     quote: '「来来来，都坐下，咱们慢慢耗。」',
-    traits: ['balanced', 'protective', 'patient'],
+    traits: ['balanced', 'patient', 'deliberate'],
     image: '/characters/feiyi.png',
   },
   {
@@ -327,7 +327,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'HHHH',
     description: '你是全场最快乐的人刘禅，享乐流代表人物，快乐就是你的武器。别人打牌靠技术，你打牌靠享乐——放权直接让队友多动一回合，自己躺平当甩手掌柜。你的快乐可以感染全场，你的傻笑可以气死内奸。内奸苦心经营了半天局势，你一个享乐直接让局面又稳了，这谁顶得住？你不需要操作，不需要算计，你只需要"嘿嘿嘿"就行了。管你什么身份，反正你有爹就行——主公是你爹，忠臣是你保镖，反贼都不好意思打你因为你太可爱了。生活中的你也是快乐本体，天塌下来当被子盖，火烧眉毛先拍个照。别人焦虑的时候你在笑，别人内耗的时候你在吃——不是你不懂烦恼，是你选择了快乐。毕竟人生苦短，不如享乐。',
     quote: '「嘿嘿嘿，有爹爹在，我怕谁！」',
-    traits: ['optimistic', 'carefree', 'trusting'],
+    traits: ['optimistic', 'carefree', 'accepting'],
     image: '/characters/liushan.png',
   },
   {
@@ -336,7 +336,7 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'OMG',
     description: '你是版本之子界徐盛，阴间到让对手想挂机的存在。破军一出，对面的手牌直接被你没收，连"等等我还有闪"的机会都不给。你是一刀999的代名词，让所有人闻风丧胆。别人需要算牌差、控距离、等时机，你只需要一件事——砍。你的刀不讲道理，不讲武德，不给你任何反应时间，就像突然被降维打击一样毫无还手之力。你不是在玩游戏，你是在虐菜；你不是在出牌，你是在发布更新公告——"本次更新：砍了你的手牌，谢谢。"生活中的你也是那种降维打击型选手，别人还在犹豫你就已经把事办了，别人还在准备你就已经交卷了。虽然偶尔会被说"太强了没意思"，但谁不想当版本答案呢？',
     quote: '「大宝的刀，砍谁谁死，这还用解释吗？」',
-    traits: ['aggressive', 'confident', 'powerful'],
+    traits: ['aggressive', 'competitive', 'determined'],
     image: '/characters/jixusheng.png',
   },
   {
@@ -345,44 +345,42 @@ const personalityTypes: PersonalityTypeDefinition[] = [
     subtitle: 'BACK',
     description: '你是魔张飞，三国杀里最不讲道理的存在——因为你根本不需要道理。别人打牌靠算计，你打牌靠吼；别人出杀要考虑收益，你出杀纯粹因为手痒。你的咆哮不是技能，是你灵魂深处的呐喊：杀杀杀杀杀！你每一回合都是全场的焦点，不是因为你多厉害，而是因为你多吵。你不是在玩游戏，你是在释放天性。别人三思而后行，你三杀而后爽。你是那种打到残血还要追着对面砍的疯子，手牌只剩一张杀你也敢冲，因为你信奉一个道理——不出杀的手牌不是手牌，是废纸。生活中的你也是行动派的极致代表，想到什么立刻去做，谁拦你跟谁急。你的字典里没有"犹豫"这个词，因为在你看来，犹豫就意味着败北。',
     quote: '「我从未见过如此厚颜无耻之人——等等，我才是那个最厚颜无耻的！」',
-    traits: ['aggressive', 'impulsive', 'brave', 'passionate'],
+    traits: ['aggressive', 'impulsive', 'brave'],
     image: '/characters/mozhangfei.png',
   },
 ];
 
 // 生成人格结果
 export function generatePersonalityResult(dimensions: Dimension[]): PersonalityResult {
-  // 计算各特征的平均得分
+  // 计算各特征得分
   const dimensionScores: Record<string, number> = {};
   for (const dim of dimensions) {
     dimensionScores[dim.id] = dim.score;
   }
 
   // 根据特征计算每个人格的匹配度
+  // 新逻辑：直接比较每个人格 traits 的平均得分，得分越高说明用户越倾向该人格
   let bestMatch = personalityTypes[0];
   let highestScore = -1;
 
   for (const personType of personalityTypes) {
-    let matchScore = 0;
+    let totalScore = 0;
     let matchCount = 0;
 
     for (const trait of personType.traits) {
       if (dimensionScores[trait] !== undefined) {
-        // 计算该特征得分与理想值的匹配度
-        // 人格特征理想值在60-80之间
-        const ideal = 70;
-        const diff = Math.abs(dimensionScores[trait] - ideal);
-        matchScore += (100 - diff);
+        totalScore += dimensionScores[trait];
         matchCount++;
       }
+      // 未在题目中出现的 trait 跳过（不计入匹配）
     }
 
     if (matchCount > 0) {
-      const avgScore = matchScore / matchCount;
-      // 添加一些随机性让结果更有趣
-      const randomFactor = Math.random() * 10;
-      if (avgScore + randomFactor > highestScore) {
-        highestScore = avgScore + randomFactor;
+      const avgScore = totalScore / matchCount;
+      // 仅在平局时添加极小的随机扰动，不影响正常匹配
+      const tiebreaker = Math.random() * 0.5;
+      if (avgScore + tiebreaker > highestScore) {
+        highestScore = avgScore + tiebreaker;
         bestMatch = personType;
       }
     }
