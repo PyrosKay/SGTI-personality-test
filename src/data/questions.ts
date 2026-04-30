@@ -197,4 +197,54 @@ export const questions: Question[] = [
       { text: '不打出【杀】，保留手牌，挨打不是无力还手，而是迷惑对手的策略', effects: { strategic: 10, patient: 8 } },
     ],
   },
+  {
+    id: 'q21',
+    text: '游戏中你更偏好哪种取胜方式？',
+    options: [
+      { text: '正面碾压，实力说话', effects: { aggressive: 10, competitive: 8 } },
+      { text: '精密布局，稳中求胜', effects: { deliberate: 10, protective: 8 } },
+      { text: '等待对手失误，一击致命', effects: { patient: 10, cunning: 8 } },
+      { text: '输赢不重要，开心就好', effects: { carefree: 10, optimistic: 8 } },
+    ],
+  },
+  {
+    id: 'q22',
+    text: '深夜睡不着时，你更可能在做什么？',
+    options: [
+      { text: '发伤感朋友圈', effects: { emotional: 10, sensitive: 8 } },
+      { text: '刷短视频傻乐', effects: { playful: 10, carefree: 8 } },
+      { text: '找朋友聊天', effects: { collaborative: 10, empathetic: 8 } },
+      { text: '冥想放空', effects: { balanced: 10, peaceful: 8 } },
+    ],
+  },
+  {
+    id: 'q23',
+    text: '团队任务中你通常扮演什么角色？',
+    options: [
+      { text: '带头大哥', effects: { leadership: 10, decisive: 8 } },
+      { text: '执行者', effects: { determined: 10, pragmatic: 8 } },
+      { text: '后勤保障', effects: { protective: 10, selfless: 8 } },
+      { text: '气氛担当', effects: { playful: 10, optimistic: 8 } },
+    ],
+  },
+  {
+    id: 'q24',
+    text: '抽卡/开箱类活动中，你通常的心态是？',
+    options: [
+      { text: '没出就继续氪，今天必须出货', effects: { impulsive: 10, decisive: 8 } },
+      { text: '出什么用什么，随缘就好', effects: { accepting: 10, optimistic: 8 } },
+      { text: '我来算算概率，找到最优策略', effects: { rational: 10, deliberate: 8 } },
+      { text: '抽到就炫耀，抽不到就整活', effects: { witty: 10, dramatic: 8 } },
+    ],
+  },
+  {
+    id: 'q25',
+    text: '游戏中队友严重失误导致失败，你会？',
+    options: [
+      { text: '请打开麦克风交流', effects: { aggressive: 10, impulsive: 8 } },
+      { text: '安慰队友下次注意', effects: { caring: 10, empathetic: 8 } },
+      { text: '不理会并尝试独自扭转局面', effects: { independent: 10, determined: 8 } },
+      { text: '反手举报', effects: { mischievous: 10, rebellious: 8 } },
+    ],
+  },
 ];
