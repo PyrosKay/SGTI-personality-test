@@ -104,6 +104,7 @@ export default function Result() {
           </div>
 
           <p className="mt-5 text-gray-700 leading-relaxed">{result.description}</p>
+          <p className="mt-4 text-xs text-gray-400 text-center">测试结果无科学依据，仅供娱乐！</p>
         </div>
 
         {/* 操作按钮 */}
