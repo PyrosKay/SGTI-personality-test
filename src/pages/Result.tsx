@@ -45,11 +45,10 @@ export default function Result() {
     return idx >= 0 ? String(idx + 1).padStart(3, '0') : '001';
   }, [result]);
 
-  // Preload share card image
+  // Preload share card image (same-origin, no crossOrigin needed)
   useEffect(() => {
     if (result?.image) {
       const img = new Image();
-      img.crossOrigin = 'anonymous';
       img.src = result.image;
     }
   }, [result?.image]);
@@ -63,6 +62,21 @@ export default function Result() {
     if (!shareCardRef.current || !result) return;
     setIsGenerating(true);
     try {
+      // Wait for all images inside share card to finish loading
+      const images = shareCardRef.current.querySelectorAll('img');
+      await Promise.all(
+        Array.from(images).map(
+          (img) =>
+            new Promise<void>((resolve) => {
+              if (img.complete && img.naturalHeight > 0) {
+                resolve();
+              } else {
+                img.onload = () => resolve();
+                img.onerror = () => resolve();
+              }
+            })
+        )
+      );
       const canvas = await html2canvas(shareCardRef.current, {
         scale: 2,
         useCORS: true,
@@ -233,7 +247,6 @@ export default function Result() {
                 <img
                   src={result.image}
                   alt={result.title}
-                  crossOrigin="anonymous"
                   style={{
                     width: '329px',
                     height: 'auto',
