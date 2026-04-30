@@ -38,6 +38,13 @@ export default function Result() {
     return personalityResult;
   }, [code]);
 
+  // 计算人格在列表中的顺序编号
+  const noNumber = useMemo(() => {
+    if (!result) return '001';
+    const idx = personalityTypes.findIndex(p => p.subtitle === result.subtitle);
+    return idx >= 0 ? String(idx + 1).padStart(3, '0') : '001';
+  }, [result]);
+
   // Preload share card image
   useEffect(() => {
     if (result?.image) {
@@ -61,6 +68,7 @@ export default function Result() {
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#F5F0E8',
+        logging: false,
       });
       const link = document.createElement('a');
       link.download = `三国杀人格测试_${result.type || '结果'}.png`;
@@ -162,10 +170,10 @@ export default function Result() {
           fontFamily: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif',
         }}
       >
-        <div style={{ width: '375px', background: '#F5F0E8', paddingBottom: '24px' }}>
-          {/* 顶部栏 */}
-          <div style={{ padding: '16px 20px 8px', position: 'relative' }}>
-            <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+        <div style={{ width: '375px', background: '#F5F0E8', paddingBottom: '28px' }}>
+          {/* 顶部栏 - 使用float避免absolute错位 */}
+          <div style={{ padding: '16px 20px 12px', overflow: 'hidden' }}>
+            <div style={{ float: 'left' }}>
               <span style={{
                 display: 'inline-block',
                 width: '10px',
@@ -178,8 +186,8 @@ export default function Result() {
                 SGTI PERSONALITY TEST
               </span>
             </div>
-            <div style={{ position: 'absolute', right: '20px', top: '16px', textAlign: 'right' }}>
-              <span style={{ fontSize: '10px', color: '#1a1a1a', fontWeight: 600 }}>NO. 001</span>
+            <div style={{ float: 'right', textAlign: 'right' }}>
+              <span style={{ fontSize: '10px', color: '#1a1a1a', fontWeight: 600 }}>NO. {noNumber}</span>
               <div style={{ marginTop: '2px' }}>
                 <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a', marginRight: '3px' }} />
                 <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a', marginRight: '3px' }} />
@@ -187,6 +195,7 @@ export default function Result() {
                 <span style={{ display: 'inline-block', width: '1px', height: '10px', background: '#1a1a1a' }} />
               </div>
             </div>
+            <div style={{ clear: 'both' }} />
           </div>
 
           {/* 主标题 */}
@@ -209,47 +218,45 @@ export default function Result() {
             </p>
           </div>
 
-          {/* 人物配图 */}
+          {/* 人物配图 - 去掉固定高度和object-fit，让图片自然比例显示 */}
           {result.image && (
             <div style={{ padding: '0 20px', textAlign: 'center' }}>
               <div style={{
-                width: '335px',
-                height: '200px',
-                margin: '0 auto',
+                display: 'inline-block',
                 border: '3px solid #1a1a1a',
                 borderRadius: '12px',
                 background: '#ffffff',
-                position: 'relative',
                 overflow: 'hidden',
+                position: 'relative',
+                maxWidth: '335px',
               }}>
-                {/* 右侧橙色装饰条 */}
-                <div style={{
-                  position: 'absolute',
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: '6px',
-                  background: '#F97316',
-                }} />
                 <img
                   src={result.image}
                   alt={result.title}
                   crossOrigin="anonymous"
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    padding: '8px 14px 8px 8px',
-                    boxSizing: 'border-box',
+                    width: '319px',
+                    height: 'auto',
+                    display: 'block',
+                    padding: '8px',
                   }}
                 />
+                {/* 右侧橙色装饰条 - 紧跟图片高度 */}
+                <div style={{
+                  position: 'absolute',
+                  right: '0',
+                  top: '0',
+                  width: '6px',
+                  height: '100%',
+                  background: '#F97316',
+                }} />
               </div>
             </div>
           )}
 
           {/* 人物和人格标签 */}
           <div style={{ padding: '16px 20px 0', textAlign: 'center' }}>
-            <div style={{ display: 'inline-block', marginRight: '8px' }}>
+            <div style={{ display: 'inline-block', marginRight: '8px', marginBottom: '6px' }}>
               <span style={{
                 display: 'inline-block',
                 padding: '6px 16px',
@@ -262,7 +269,7 @@ export default function Result() {
                 人物：{result.type}
               </span>
             </div>
-            <div style={{ display: 'inline-block' }}>
+            <div style={{ display: 'inline-block', marginBottom: '6px' }}>
               <span style={{
                 display: 'inline-block',
                 padding: '6px 16px',
@@ -277,49 +284,22 @@ export default function Result() {
             </div>
           </div>
 
-          {/* 金句 */}
+          {/* 金句 - 去掉absolute引号，改用普通行内元素 */}
           <div style={{ padding: '16px 20px 0' }}>
             <div style={{
               width: '335px',
               margin: '0 auto',
-              padding: '18px 20px',
               background: '#1a1a1a',
               borderRadius: '12px',
-              boxShadow: '4px 4px 0px rgba(0,0,0,0.1)',
-              position: 'relative',
+              padding: '18px 20px',
               boxSizing: 'border-box',
+              textAlign: 'center',
             }}>
-              {/* 左侧橙色引号 */}
-              <span style={{
-                position: 'absolute',
-                left: '12px',
-                top: '8px',
-                fontSize: '28px',
-                color: '#F97316',
-                fontWeight: 900,
-                lineHeight: 1,
-              }}>"</span>
-              <p style={{
-                fontSize: '15px',
-                color: '#ffffff',
-                fontWeight: 700,
-                margin: 0,
-                lineHeight: 1.6,
-                textAlign: 'center',
-                padding: '0 16px',
-              }}>
-                {result.quote}
-              </p>
-              {/* 右侧灰色引号 */}
-              <span style={{
-                position: 'absolute',
-                right: '12px',
-                bottom: '4px',
-                fontSize: '28px',
-                color: '#9CA3AF',
-                fontWeight: 900,
-                lineHeight: 1,
-              }}>"</span>
+              <span style={{ fontSize: '22px', color: '#F97316', fontWeight: 900, lineHeight: 1, verticalAlign: 'top' }}>"</span>
+              <span style={{ fontSize: '15px', color: '#ffffff', fontWeight: 700, lineHeight: 1.6, margin: '0 4px' }}>
+                {result.quote.replace(/[「」]/g, '')}
+              </span>
+              <span style={{ fontSize: '22px', color: '#9CA3AF', fontWeight: 900, lineHeight: 1, verticalAlign: 'bottom' }}>"</span>
             </div>
           </div>
 
@@ -335,7 +315,7 @@ export default function Result() {
               boxSizing: 'border-box',
             }}>
               {/* 标题栏 */}
-              <div style={{ position: 'relative', paddingBottom: '10px' }}>
+              <div style={{ paddingBottom: '10px', borderBottom: '1px solid #1a1a1a' }}>
                 <span style={{
                   display: 'inline-block',
                   width: '8px',
@@ -357,14 +337,13 @@ export default function Result() {
                 }}>
                   / ANALYSIS
                 </span>
-                <div style={{ width: '100%', height: '1px', background: '#1a1a1a', marginTop: '8px' }} />
               </div>
               {/* 描述文字 */}
               <p style={{
                 fontSize: '12px',
                 color: '#374151',
                 lineHeight: 1.8,
-                margin: '10px 0 0 0',
+                margin: '12px 0 0 0',
               }}>
                 {result.description}
               </p>
@@ -372,7 +351,7 @@ export default function Result() {
           </div>
 
           {/* 底部提示 */}
-          <div style={{ padding: '16px 20px 0', textAlign: 'center' }}>
+          <div style={{ padding: '20px 20px 0', textAlign: 'center' }}>
             <span style={{
               display: 'inline-block',
               padding: '6px 16px',
