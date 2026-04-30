@@ -32,7 +32,7 @@ export default function Home() {
 
         {/* 人格类型预览 */}
         <div className="text-center">
-          <p className="text-sm font-medium text-gray-500 tracking-wide">聪明人做的测试</p>
+          <p className="text-lg font-medium text-gray-500 tracking-wide">聪明人做的测试</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6">
           {[
