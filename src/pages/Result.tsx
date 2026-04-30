@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import html2canvas from 'html2canvas';
 import { loadProgress, calculateDimensions, generatePersonalityResult, clearProgress, personalityTypes } from '../utils/calculator';
 
 export default function Result() {
   const navigate = useNavigate();
   const { code } = useParams<{ code?: string }>();
+  const shareCardRef = useRef<HTMLDivElement>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const result = useMemo(() => {
     // Preview mode: directly show personality by code
@@ -15,6 +18,7 @@ export default function Result() {
           type: person.chineseName,
           title: `${person.chineseName} · ${person.englishName}`,
           subtitle: person.subtitle,
+          tag: person.englishName,
           description: person.description,
           quote: person.quote,
           image: person.image,
@@ -39,22 +43,24 @@ export default function Result() {
     navigate('/');
   };
 
-  const handleShare = async () => {
-    const shareText = `我刚刚做了三国杀性格鉴定，结果是"${result?.title} (${result?.subtitle})"！你也来试试吧~`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'SGTI 三国杀人格测试',
-          text: shareText,
-        });
-      } catch {
-        // 用户取消分享
-      }
-    } else {
-      // 复制到剪贴板
-      await navigator.clipboard.writeText(shareText);
-      alert('结果已复制到剪贴板！');
+  const handleGenerateImage = async () => {
+    if (!shareCardRef.current || !result) return;
+    setIsGenerating(true);
+    try {
+      const canvas = await html2canvas(shareCardRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+      });
+      const link = document.createElement('a');
+      link.download = `三国杀人格测试_${result.type || '结果'}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch {
+      alert('图片生成失败，请重试');
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -109,10 +115,22 @@ export default function Result() {
         </div>
 
         {/* 操作按钮 */}
-        <div className="pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <button
+            onClick={handleGenerateImage}
+            disabled={isGenerating}
+            className="w-full sm:w-auto px-10 py-3 bg-amber-600 text-white rounded-full font-medium hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span className="inline-flex items-center justify-center gap-2">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {isGenerating ? '生成中...' : '生成分享图片'}
+            </span>
+          </button>
           <button
             onClick={handleRestart}
-            className="w-full sm:w-auto mx-auto block px-10 py-3 bg-white text-gray-900 rounded-full font-medium border-2 border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-colors"
+            className="w-full sm:w-auto px-10 py-3 bg-white text-gray-900 rounded-full font-medium border-2 border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-colors"
           >
             <span className="inline-flex items-center justify-center gap-2">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,6 +139,102 @@ export default function Result() {
               重新测试
             </span>
           </button>
+        </div>
+      </div>
+
+      {/* 隐藏的分享卡片 - 用于生成图片 */}
+      <div
+        ref={shareCardRef}
+        style={{
+          position: 'fixed',
+          left: '-9999px',
+          top: 0,
+          width: '375px',
+        }}
+      >
+        <div
+          style={{
+            width: '375px',
+            padding: '40px 24px',
+            background: 'linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+          }}
+        >
+          {/* 顶部标题 */}
+          <p style={{ fontSize: '12px', color: '#fcd34d', letterSpacing: '2px', textTransform: 'uppercase', margin: 0 }}>
+            SGTI 三国杀人格测试
+          </p>
+
+          {/* 人格图片 */}
+          {result.image && (
+            <img
+              src={result.image}
+              alt={result.title}
+              crossOrigin="anonymous"
+              style={{
+                width: '200px',
+                height: '200px',
+                objectFit: 'contain',
+              }}
+            />
+          )}
+
+          {/* 人格名称 */}
+          <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#ffffff', margin: 0, textAlign: 'center' }}>
+            {result.title}
+          </h2>
+
+          {/* 中文称号 */}
+          <p style={{ fontSize: '16px', color: '#fcd34d', margin: 0, fontWeight: 500 }}>
+            {result.tag}
+          </p>
+
+          {/* 代码 */}
+          <p style={{ fontSize: '14px', color: '#fde68a', margin: 0, fontFamily: 'monospace' }}>
+            {result.subtitle}
+          </p>
+
+          {/* 金句 */}
+          <div
+            style={{
+              width: '100%',
+              padding: '16px',
+              background: 'rgba(255,255,255,0.15)',
+              borderRadius: '12px',
+              borderLeft: '4px solid #fcd34d',
+            }}
+          >
+            <p style={{ fontSize: '14px', color: '#ffffff', fontStyle: 'italic', margin: 0, lineHeight: 1.6 }}>
+              {result.quote}
+            </p>
+          </div>
+
+          {/* 简短描述 */}
+          <p
+            style={{
+              fontSize: '13px',
+              color: '#fde68a',
+              lineHeight: 1.7,
+              textAlign: 'center',
+              margin: 0,
+              maxWidth: '320px',
+            }}
+          >
+            {result.description.slice(0, 80)}...
+          </p>
+
+          {/* 底部 */}
+          <div style={{ marginTop: '8px', textAlign: 'center' }}>
+            <p style={{ fontSize: '11px', color: '#fcd34d', margin: 0, opacity: 0.8 }}>
+              扫码测试，发现你的三国杀人格
+            </p>
+            <p style={{ fontSize: '10px', color: '#fde68a', margin: '4px 0 0 0', opacity: 0.6 }}>
+              测试结果无科学依据，仅供娱乐
+            </p>
+          </div>
         </div>
       </div>
     </div>
